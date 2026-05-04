@@ -103,6 +103,54 @@ FrameWidgetClass {
              Image ""
              Size 128 2
             }
+            ButtonWidgetClass "{5B00000000000001}" : "{0022F0B45ADBC5AC}UI/layouts/WidgetLibrary/EditBox/WLib_EditBox.layout" {
+             Name "SearchBox"
+             Slot LayoutSlot "{56EEDE07C9F827C2}" {
+              Padding 0 0 0 12
+             }
+             components {
+              SCR_EditBoxComponent "{5B00000000000002}" {
+               m_sLabel "Search here..."
+               m_bShowWriteIcon 0
+              }
+             }
+             {
+              VerticalLayoutWidgetClass "{5AA4D27F39EB2514}" {
+               Prefab "{5AA4D27F39EB2514}"
+               {
+                SizeLayoutWidgetClass "{5538C205B27B0F5D}" {
+                 Prefab "{5538C205B27B0F5D}"
+                 {
+                  OverlayWidgetClass "{55367D8E531FD623}" {
+                   Prefab "{55367D8E531FD623}"
+                   {
+                    HorizontalLayoutWidgetClass "{55367D8E4592BC6E}" {
+                     Prefab "{55367D8E4592BC6E}"
+                     {
+                      OverlayWidgetClass "{5538C2059A570E94}" {
+                       Prefab "{5538C2059A570E94}"
+                       {
+                        HorizontalLayoutWidgetClass "{58D095EE846E2B93}" {
+                         Prefab "{58D095EE846E2B93}"
+                         {
+                          EditBoxWidgetClass "{5538C2058B18F877}" {
+                           Prefab "{5538C2058B18F877}"
+                           "Placeholder text" "Search here..."
+                          }
+                         }
+                        }
+                       }
+                      }
+                     }
+                    }
+                   }
+                  }
+                 }
+                }
+               }
+              }
+             }
+            }
             OverlayWidgetClass "{598EF9FB202E402E}" {
              Name "ContentSegment"
              Slot LayoutSlot "{56EF0B1E79FE7342}" {
