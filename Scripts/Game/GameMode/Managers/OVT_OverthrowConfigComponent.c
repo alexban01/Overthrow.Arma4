@@ -36,32 +36,112 @@ class OVT_OverthrowConfigStruct
 	int campItemLimit;
 	int fobItemLimit;
 	
-	//Difficulty settings
+	//Difficulty override - set overrideDifficulty to true and specify any fields to override them on top of the chosen preset
 	bool overrideDifficulty;
+	//Economy (kept for backwards compat)
 	int startingCash;
 	float gunDealerSellPriceMultiplier;
 	float procurementMultiplier;
 	float vehiclePriceMultiplier;
-	
+	//Wanted system
+	int wantedTimeout;
+	int wantedOneTimeout;
+	//Occupying faction
+	int startingResources;
+	int baseResourcesPerTick;
+	int resourcesPerTick;
+	int baseResourceCost;
+	float radioTowerRange;
+	float baseSupportRange;
+	int patrolGroupsMin;
+	int patrolGroupsMax;
+	int defenseGroupsBaseMax;
+	float baseRange;
+	float baseCloseRange;
+	float counterAttackTimeout;
+	//Economy (extended)
+	int respawnCost;
+	int fastTravelCost;
+	float placeableCostMultiplier;
+	float buildableCostMultiplier;
+	float realEstateCostMultiplier;
+	int donationIncome;
+	int taxIncome;
+	int busTicketPrice;
+	int baseRecruitCost;
+	//Resistance faction
+	int baseThreat;
+	float threatReductionFactor;
+	float minFastTravelDistance;
+	//QRF
+	int QRFFastTravelMode;
+	int QRFPointsToWin;
+	int maxQRF;
+	//Undercover system
+	float disguiseDetectionDistance;
+	float baseDisguiseEffectiveness;
+	float wantedReductionMultiplier;
+	float detectionRangeMultiplier;
+
 	void SetDefaults()
 	{
 		discordWebHookURL = "see wiki: https://github.com/ArmaOverthrow/Overthrow.Arma4/wiki/Discord-Web-Hook";
 		occupyingFaction = "";
 		supportingFaction = "";
 		officers = new array<string>;
-		difficulty = "";	
-		showPlayerPosition = true;	
-		mobileFOBOfficersOnly = true; // Default: restrict Mobile FOB deployment to officers only
-		
+		difficulty = "";
+		showPlayerPosition = true;
+		mobileFOBOfficersOnly = true;
+
 		houseItemLimit = 20;
 		campItemLimit = 40;
 		fobItemLimit = 100;
-		
+
 		overrideDifficulty = false;
+		//Economy (backwards compat) - Normal preset values
 		startingCash = 100;
 		gunDealerSellPriceMultiplier = 0.5;
 		procurementMultiplier = 0.8;
 		vehiclePriceMultiplier = 1.0;
+		//Wanted system
+		wantedTimeout = 30000;
+		wantedOneTimeout = 120000;
+		//Occupying faction
+		startingResources = 500;
+		baseResourcesPerTick = 250;
+		resourcesPerTick = 500;
+		baseResourceCost = 15;
+		radioTowerRange = 1500;
+		baseSupportRange = 750;
+		patrolGroupsMin = 2;
+		patrolGroupsMax = 4;
+		defenseGroupsBaseMax = 5;
+		baseRange = 280;
+		baseCloseRange = 220;
+		counterAttackTimeout = 100;
+		//Economy (extended)
+		respawnCost = 5;
+		fastTravelCost = 5;
+		placeableCostMultiplier = 1.0;
+		buildableCostMultiplier = 1.0;
+		realEstateCostMultiplier = 0.5;
+		donationIncome = 5;
+		taxIncome = 30;
+		busTicketPrice = 5;
+		baseRecruitCost = 250;
+		//Resistance faction
+		baseThreat = 0;
+		threatReductionFactor = 0.007;
+		minFastTravelDistance = 500;
+		//QRF
+		QRFFastTravelMode = 1; //NOQRF
+		QRFPointsToWin = 100;
+		maxQRF = 750;
+		//Undercover system
+		disguiseDetectionDistance = 15;
+		baseDisguiseEffectiveness = 0.8;
+		wantedReductionMultiplier = 0.7;
+		detectionRangeMultiplier = 0.6;
 	}
 }
 
@@ -542,8 +622,17 @@ class OVT_OverthrowConfigComponent: OVT_Component
 		writer.WriteFloat(m_Difficulty.gunDealerSellPriceMultiplier);		
 		writer.WriteFloat(m_Difficulty.procurementMultiplier);	
 		writer.WriteFloat(m_Difficulty.vehiclePriceMultiplier);
-		
-		//Send server config options	
+		writer.WriteInt(m_Difficulty.startingCash);
+		writer.WriteInt(m_Difficulty.respawnCost);
+		writer.WriteInt(m_Difficulty.fastTravelCost);
+		writer.WriteInt(m_Difficulty.patrolGroupsMin);
+		writer.WriteInt(m_Difficulty.patrolGroupsMax);
+		writer.WriteFloat(m_Difficulty.detectionRangeMultiplier);
+		writer.WriteFloat(m_Difficulty.baseDisguiseEffectiveness);
+		writer.WriteInt((int)m_Difficulty.QRFFastTravelMode);
+		writer.WriteInt(m_Difficulty.maxQRF);
+
+		//Send server config options
 		writer.WriteBool(m_ConfigFile.mobileFOBOfficersOnly);	
 		writer.WriteInt(m_ConfigFile.houseItemLimit);
 		writer.WriteInt(m_ConfigFile.campItemLimit);
@@ -592,7 +681,34 @@ class OVT_OverthrowConfigComponent: OVT_Component
 		
 		if (!reader.ReadFloat(f)) return false;
 		m_Difficulty.vehiclePriceMultiplier = f;
-		
+
+		if (!reader.ReadInt(i)) return false;
+		m_Difficulty.startingCash = i;
+
+		if (!reader.ReadInt(i)) return false;
+		m_Difficulty.respawnCost = i;
+
+		if (!reader.ReadInt(i)) return false;
+		m_Difficulty.fastTravelCost = i;
+
+		if (!reader.ReadInt(i)) return false;
+		m_Difficulty.patrolGroupsMin = i;
+
+		if (!reader.ReadInt(i)) return false;
+		m_Difficulty.patrolGroupsMax = i;
+
+		if (!reader.ReadFloat(f)) return false;
+		m_Difficulty.detectionRangeMultiplier = f;
+
+		if (!reader.ReadFloat(f)) return false;
+		m_Difficulty.baseDisguiseEffectiveness = f;
+
+		if (!reader.ReadInt(i)) return false;
+		m_Difficulty.QRFFastTravelMode = i;
+
+		if (!reader.ReadInt(i)) return false;
+		m_Difficulty.maxQRF = i;
+
 		//Receive server config options
 		if (!reader.ReadBool(b)) return false;
 		

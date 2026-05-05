@@ -89,6 +89,8 @@ OVT_OverthrowGameMode {
     }
     OVT_DifficultySettings "{6466E3EA33A737F7}" : "{70CC1650D9BE0DDC}Configs/Difficulty/Difficulty_Extreme.conf" {
     }
+    OVT_DifficultySettings "{6466E3EA33B3C1F2}" : "{7A1C4F8B3D9E2AB5}Configs/Difficulty/Difficulty_Custom.conf" {
+    }
    }
    m_pGunDealerPrefab "{59929550D81A3045}Prefabs/Characters/Factions/INDFOR/FIA/Character_FIA_GunDealer.et"
    m_pCivilianPrefab "{1AF5B9AE5CFD4434}Prefabs/Groups/INDFOR/Group_CIV.et"

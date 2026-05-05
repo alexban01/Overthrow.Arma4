@@ -262,6 +262,39 @@ class OVT_OverthrowGameMode : SCR_BaseGameMode
 				config.m_Difficulty.startingCash = config.m_ConfigFile.startingCash;
 				config.m_Difficulty.procurementMultiplier = config.m_ConfigFile.procurementMultiplier;
 				config.m_Difficulty.vehiclePriceMultiplier = config.m_ConfigFile.vehiclePriceMultiplier;
+				config.m_Difficulty.wantedTimeout = config.m_ConfigFile.wantedTimeout;
+				config.m_Difficulty.wantedOneTimeout = config.m_ConfigFile.wantedOneTimeout;
+				config.m_Difficulty.startingResources = config.m_ConfigFile.startingResources;
+				config.m_Difficulty.baseResourcesPerTick = config.m_ConfigFile.baseResourcesPerTick;
+				config.m_Difficulty.resourcesPerTick = config.m_ConfigFile.resourcesPerTick;
+				config.m_Difficulty.baseResourceCost = config.m_ConfigFile.baseResourceCost;
+				config.m_Difficulty.radioTowerRange = config.m_ConfigFile.radioTowerRange;
+				config.m_Difficulty.baseSupportRange = config.m_ConfigFile.baseSupportRange;
+				config.m_Difficulty.patrolGroupsMin = config.m_ConfigFile.patrolGroupsMin;
+				config.m_Difficulty.patrolGroupsMax = config.m_ConfigFile.patrolGroupsMax;
+				config.m_Difficulty.defenseGroupsBaseMax = config.m_ConfigFile.defenseGroupsBaseMax;
+				config.m_Difficulty.baseRange = config.m_ConfigFile.baseRange;
+				config.m_Difficulty.baseCloseRange = config.m_ConfigFile.baseCloseRange;
+				config.m_Difficulty.counterAttackTimeout = config.m_ConfigFile.counterAttackTimeout;
+				config.m_Difficulty.respawnCost = config.m_ConfigFile.respawnCost;
+				config.m_Difficulty.fastTravelCost = config.m_ConfigFile.fastTravelCost;
+				config.m_Difficulty.placeableCostMultiplier = config.m_ConfigFile.placeableCostMultiplier;
+				config.m_Difficulty.buildableCostMultiplier = config.m_ConfigFile.buildableCostMultiplier;
+				config.m_Difficulty.realEstateCostMultiplier = config.m_ConfigFile.realEstateCostMultiplier;
+				config.m_Difficulty.donationIncome = config.m_ConfigFile.donationIncome;
+				config.m_Difficulty.taxIncome = config.m_ConfigFile.taxIncome;
+				config.m_Difficulty.busTicketPrice = config.m_ConfigFile.busTicketPrice;
+				config.m_Difficulty.baseRecruitCost = config.m_ConfigFile.baseRecruitCost;
+				config.m_Difficulty.baseThreat = config.m_ConfigFile.baseThreat;
+				config.m_Difficulty.threatReductionFactor = config.m_ConfigFile.threatReductionFactor;
+				config.m_Difficulty.minFastTravelDistance = config.m_ConfigFile.minFastTravelDistance;
+				config.m_Difficulty.QRFFastTravelMode = config.m_ConfigFile.QRFFastTravelMode;
+				config.m_Difficulty.QRFPointsToWin = config.m_ConfigFile.QRFPointsToWin;
+				config.m_Difficulty.maxQRF = config.m_ConfigFile.maxQRF;
+				config.m_Difficulty.disguiseDetectionDistance = config.m_ConfigFile.disguiseDetectionDistance;
+				config.m_Difficulty.baseDisguiseEffectiveness = config.m_ConfigFile.baseDisguiseEffectiveness;
+				config.m_Difficulty.wantedReductionMultiplier = config.m_ConfigFile.wantedReductionMultiplier;
+				config.m_Difficulty.detectionRangeMultiplier = config.m_ConfigFile.detectionRangeMultiplier;
 			}
 		}
 

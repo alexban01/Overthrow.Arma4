@@ -116,6 +116,144 @@ FrameWidgetClass {
        "Min Font Size" 18
        "Horizontal Alignment" Right
       }
+      ScrollLayoutWidgetClass "{7B00001AABBCCD01}" {
+       Name "CustomDifficultyPanel"
+       Slot LayoutSlot "{7B00001AABBCCD02}" {
+        SizeMode Fill
+        Padding 2 0 2 0
+       }
+       "Is Visible" 0
+       {
+        VerticalLayoutWidgetClass "{7B0000CAABBCCD01}" {
+         Name "CustomSpinboxList"
+         Slot OverlayWidgetSlot "{7B0000CAABBCCD02}" {
+          HorizontalAlign 3
+         }
+         {
+          ButtonWidgetClass "{7B00002AABBCCD01}" : "{C9DF0E6590F6C388}UI/layouts/WidgetLibrary/SpinBox/WLib_SpinBox.layout" {
+           Name "CustomShowOnMap"
+           Slot LayoutSlot "{7B00002AABBCCD02}" {
+            HorizontalAlign 3
+            Padding 4 4 4 4
+           }
+           components {
+            SCR_SpinBoxComponent "{5472C6CBC0640458}" {
+             m_sLabel "Show on map"
+            }
+           }
+          }
+          ButtonWidgetClass "{7B00003AABBCCD01}" : "{C9DF0E6590F6C388}UI/layouts/WidgetLibrary/SpinBox/WLib_SpinBox.layout" {
+           Name "CustomStartingCash"
+           Slot LayoutSlot "{7B00003AABBCCD02}" {
+            HorizontalAlign 3
+            Padding 4 4 4 4
+           }
+           components {
+            SCR_SpinBoxComponent "{5472C6CBC0640458}" {
+             m_sLabel "Starting cash"
+            }
+           }
+          }
+          ButtonWidgetClass "{7B00004AABBCCD01}" : "{C9DF0E6590F6C388}UI/layouts/WidgetLibrary/SpinBox/WLib_SpinBox.layout" {
+           Name "CustomRespawnCost"
+           Slot LayoutSlot "{7B00004AABBCCD02}" {
+            HorizontalAlign 3
+            Padding 4 4 4 4
+           }
+           components {
+            SCR_SpinBoxComponent "{5472C6CBC0640458}" {
+             m_sLabel "Respawn cost"
+            }
+           }
+          }
+          ButtonWidgetClass "{7B00005AABBCCD01}" : "{C9DF0E6590F6C388}UI/layouts/WidgetLibrary/SpinBox/WLib_SpinBox.layout" {
+           Name "CustomFastTravelCost"
+           Slot LayoutSlot "{7B00005AABBCCD02}" {
+            HorizontalAlign 3
+            Padding 4 4 4 4
+           }
+           components {
+            SCR_SpinBoxComponent "{5472C6CBC0640458}" {
+             m_sLabel "Fast travel cost"
+            }
+           }
+          }
+          ButtonWidgetClass "{7B00006AABBCCD01}" : "{C9DF0E6590F6C388}UI/layouts/WidgetLibrary/SpinBox/WLib_SpinBox.layout" {
+           Name "CustomPatrolMin"
+           Slot LayoutSlot "{7B00006AABBCCD02}" {
+            HorizontalAlign 3
+            Padding 4 4 4 4
+           }
+           components {
+            SCR_SpinBoxComponent "{5472C6CBC0640458}" {
+             m_sLabel "Min patrol groups"
+            }
+           }
+          }
+          ButtonWidgetClass "{7B00007AABBCCD01}" : "{C9DF0E6590F6C388}UI/layouts/WidgetLibrary/SpinBox/WLib_SpinBox.layout" {
+           Name "CustomPatrolMax"
+           Slot LayoutSlot "{7B00007AABBCCD02}" {
+            HorizontalAlign 3
+            Padding 4 4 4 4
+           }
+           components {
+            SCR_SpinBoxComponent "{5472C6CBC0640458}" {
+             m_sLabel "Max patrol groups"
+            }
+           }
+          }
+          ButtonWidgetClass "{7B00008AABBCCD01}" : "{C9DF0E6590F6C388}UI/layouts/WidgetLibrary/SpinBox/WLib_SpinBox.layout" {
+           Name "CustomDetectionRange"
+           Slot LayoutSlot "{7B00008AABBCCD02}" {
+            HorizontalAlign 3
+            Padding 4 4 4 4
+           }
+           components {
+            SCR_SpinBoxComponent "{5472C6CBC0640458}" {
+             m_sLabel "Enemy detection range"
+            }
+           }
+          }
+          ButtonWidgetClass "{7B00009AABBCCD01}" : "{C9DF0E6590F6C388}UI/layouts/WidgetLibrary/SpinBox/WLib_SpinBox.layout" {
+           Name "CustomDisguise"
+           Slot LayoutSlot "{7B00009AABBCCD02}" {
+            HorizontalAlign 3
+            Padding 4 4 4 4
+           }
+           components {
+            SCR_SpinBoxComponent "{5472C6CBC0640458}" {
+             m_sLabel "Disguise effectiveness"
+            }
+           }
+          }
+          ButtonWidgetClass "{7B0000AAABBCCD01}" : "{C9DF0E6590F6C388}UI/layouts/WidgetLibrary/SpinBox/WLib_SpinBox.layout" {
+           Name "CustomQRFMode"
+           Slot LayoutSlot "{7B0000AAABBCCD02}" {
+            HorizontalAlign 3
+            Padding 4 4 4 4
+           }
+           components {
+            SCR_SpinBoxComponent "{5472C6CBC0640458}" {
+             m_sLabel "QRF fast travel"
+            }
+           }
+          }
+          ButtonWidgetClass "{7B0000BAABBCCD01}" : "{C9DF0E6590F6C388}UI/layouts/WidgetLibrary/SpinBox/WLib_SpinBox.layout" {
+           Name "CustomMaxQRF"
+           Slot LayoutSlot "{7B0000BAABBCCD02}" {
+            HorizontalAlign 3
+            Padding 4 4 4 4
+           }
+           components {
+            SCR_SpinBoxComponent "{5472C6CBC0640458}" {
+             m_sLabel "Max QRF size"
+            }
+           }
+          }
+         }
+        }
+       }
+      }
       FrameWidgetClass "{599D315A49A619C7}" {
        Name "Fill"
        Slot LayoutSlot "{599D315A49A619AE}" {

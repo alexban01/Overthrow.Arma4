@@ -1,7 +1,7 @@
 GameProject {
  ID "Overthrow"
- GUID "59B657D731E2A11D"
- TITLE "Overthrow"
+ GUID "A9B657D731E2A11D"
+ TITLE "Overthrow Test"
  Dependencies {
   "58D0FB3206B6F859" "5D6EBC81EB1842EF"
  }

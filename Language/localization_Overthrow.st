@@ -1024,6 +1024,76 @@ StringTable {
    Author "Aaron Static"
    LastChanged "CrioUA"
   }
+  CustomStringTableItem "{7B0C001AABBCCD01}" {
+   Id "OVT-Custom-ShowOnMap"
+   Target_en_us "Show player on map"
+   Modified 1777766400
+   Author "ba.nu"
+   LastChanged "ba.nu"
+  }
+  CustomStringTableItem "{7B0C002AABBCCD01}" {
+   Id "OVT-Custom-StartingCash"
+   Target_en_us "Starting cash"
+   Modified 1777766400
+   Author "ba.nu"
+   LastChanged "ba.nu"
+  }
+  CustomStringTableItem "{7B0C003AABBCCD01}" {
+   Id "OVT-Custom-RespawnCost"
+   Target_en_us "Respawn cost"
+   Modified 1777766400
+   Author "ba.nu"
+   LastChanged "ba.nu"
+  }
+  CustomStringTableItem "{7B0C004AABBCCD01}" {
+   Id "OVT-Custom-FastTravelCost"
+   Target_en_us "Fast travel cost"
+   Modified 1777766400
+   Author "ba.nu"
+   LastChanged "ba.nu"
+  }
+  CustomStringTableItem "{7B0C005AABBCCD01}" {
+   Id "OVT-Custom-PatrolMin"
+   Target_en_us "Min patrol groups"
+   Modified 1777766400
+   Author "ba.nu"
+   LastChanged "ba.nu"
+  }
+  CustomStringTableItem "{7B0C006AABBCCD01}" {
+   Id "OVT-Custom-PatrolMax"
+   Target_en_us "Max patrol groups"
+   Modified 1777766400
+   Author "ba.nu"
+   LastChanged "ba.nu"
+  }
+  CustomStringTableItem "{7B0C007AABBCCD01}" {
+   Id "OVT-Custom-DetectionRange"
+   Target_en_us "Enemy detection range"
+   Modified 1777766400
+   Author "ba.nu"
+   LastChanged "ba.nu"
+  }
+  CustomStringTableItem "{7B0C008AABBCCD01}" {
+   Id "OVT-Custom-Disguise"
+   Target_en_us "Disguise effectiveness"
+   Modified 1777766400
+   Author "ba.nu"
+   LastChanged "ba.nu"
+  }
+  CustomStringTableItem "{7B0C009AABBCCD01}" {
+   Id "OVT-Custom-QRFMode"
+   Target_en_us "QRF fast travel"
+   Modified 1777766400
+   Author "ba.nu"
+   LastChanged "ba.nu"
+  }
+  CustomStringTableItem "{7B0C00AAABBCCD01}" {
+   Id "OVT-Custom-MaxQRF"
+   Target_en_us "Max QRF size"
+   Modified 1777766400
+   Author "ba.nu"
+   LastChanged "ba.nu"
+  }
   CustomStringTableItem "{59C84C639B645258}" {
    Id "OVT-DonateFunds"
    Target_en_us "Donate Funds"
