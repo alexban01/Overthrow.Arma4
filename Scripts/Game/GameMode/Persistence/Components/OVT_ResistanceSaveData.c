@@ -9,6 +9,7 @@ class OVT_ResistanceSaveData : EPF_ComponentSaveData
 	ref array<ref OVT_CampData> m_Camps;
 	string m_sPlayerFactionKey;
 	ref array<ref OVT_FOBData> m_FOBs;
+	int m_iResistanceHR;
 	
 	
 	//Jobs
@@ -24,7 +25,8 @@ class OVT_ResistanceSaveData : EPF_ComponentSaveData
 	override EPF_EReadResult ReadFrom(IEntity owner, GenericComponent component, EPF_ComponentSaveDataClass attributes)
 	{		
 		OVT_ResistanceFactionManager resistance = OVT_ResistanceFactionManager.Cast(component);
-		
+
+		m_iResistanceHR = resistance.m_iResistanceHR;
 		m_Camps = new array<ref OVT_CampData>;
 		m_FOBs = new array<ref OVT_FOBData>;
 		m_sPlayerFactionKey = OVT_Global.GetConfig().m_sPlayerFaction;
@@ -128,7 +130,9 @@ class OVT_ResistanceSaveData : EPF_ComponentSaveData
 	override EPF_EApplyResult ApplyTo(IEntity owner, GenericComponent component, EPF_ComponentSaveDataClass attributes)
 	{
 		OVT_ResistanceFactionManager resistance = OVT_ResistanceFactionManager.Cast(component);
-		
+
+		resistance.m_iResistanceHR = m_iResistanceHR;
+
 		if (m_sPlayerFactionKey.IsEmpty())
 		{
 			Print("Player faction key is invalid, setting to FIA", LogLevel.WARNING);

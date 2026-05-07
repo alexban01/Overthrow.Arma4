@@ -141,6 +141,11 @@ class OVT_Global : Managed
 	{
 		return OVT_LoadoutManagerComponent.GetInstance();
 	}
+
+	static OVT_FactoryManagerComponent GetFactories()
+	{
+		return OVT_FactoryManagerComponent.GetInstance();
+	}
 	
 	static bool PlayerInRange(vector pos, int range)
 	{		

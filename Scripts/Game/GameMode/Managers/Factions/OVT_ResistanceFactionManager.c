@@ -93,6 +93,11 @@ class OVT_ResistanceFactionManager: OVT_Component
 	protected IEntity m_pCurrentDeploymentTarget;
 	protected SCR_AIGroup m_TempGroup;
 	
+	int m_iResistanceHR;
+
+	protected int m_iHourPaidHRRegen = -1;
+	protected TimeAndWeatherManagerEntity m_Time;
+
 	ref ScriptInvoker m_OnPlace = new ScriptInvoker();
 	ref ScriptInvoker m_OnBuild = new ScriptInvoker();
 	
@@ -136,7 +141,66 @@ class OVT_ResistanceFactionManager: OVT_Component
 	
 	void Init(IEntity owner)
 	{
-		GetGame().GetCallqueue().CallLater(RegisterUpgrades, 0);		
+		GetGame().GetCallqueue().CallLater(RegisterUpgrades, 0);
+
+		if(!Replication.IsServer()) return;
+
+		float timeMul = 6;
+		OVT_TimeAndWeatherHandlerComponent tw = OVT_TimeAndWeatherHandlerComponent.Cast(GetGame().GetGameMode().FindComponent(OVT_TimeAndWeatherHandlerComponent));
+		if(tw) timeMul = tw.GetDayTimeMultiplier();
+		GetGame().GetCallqueue().CallLater(CheckUpdate, 60000 / timeMul, true, GetOwner());
+	}
+
+	void CheckUpdate()
+	{
+		if(!Replication.IsServer()) return;
+
+		if(!m_Time)
+		{
+			ChimeraWorld world = GetOwner().GetWorld();
+			m_Time = world.GetTimeAndWeatherManager();
+		}
+
+		PlayerManager mgr = GetGame().GetPlayerManager();
+		if(mgr.GetPlayerCount() == 0) return;
+
+		TimeContainer time = m_Time.GetTime();
+
+		if((time.m_iHours == 0
+			|| time.m_iHours == 6
+			|| time.m_iHours == 12
+			|| time.m_iHours == 18)
+			&&
+			m_iHourPaidHRRegen != time.m_iHours)
+		{
+			m_iHourPaidHRRegen = time.m_iHours;
+			RegenResistanceHR();
+		}
+	}
+
+	protected void RegenResistanceHR()
+	{
+		int totalSupport = 0;
+		foreach(OVT_TownData town : OVT_Global.GetTowns().GetTowns())
+		{
+			if(town.faction == OVT_Global.GetConfig().GetPlayerFactionIndex())
+				totalSupport += town.support;
+		}
+		OVT_DifficultySettings diff = OVT_Global.GetDifficulty();
+		int regen = Math.Round(totalSupport * diff.resistanceHRRegenPerSupport);
+		m_iResistanceHR = Math.Min(diff.resistanceHRMax, m_iResistanceHR + regen);
+		Rpc(RpcDo_SetResistanceHR, m_iResistanceHR);
+		Print("[Overthrow.ResistanceFactionManager] HR regenerated to: " + m_iResistanceHR);
+	}
+
+	int GetResistanceHR() { return m_iResistanceHR; }
+
+	bool TakeResistanceHR(int amount)
+	{
+		if(m_iResistanceHR < amount) return false;
+		m_iResistanceHR -= amount;
+		Rpc(RpcDo_SetResistanceHR, m_iResistanceHR);
+		return true;
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -787,11 +851,19 @@ class OVT_ResistanceFactionManager: OVT_Component
 		access.MoveInVehicle(m_TempVehicle, ECompartmentType.TURRET);
 	}		
 	
-	//RPC Methods	
+	//RPC Methods
+	[RplRpc(RplChannel.Reliable, RplRcver.Broadcast)]
+	protected void RpcDo_SetResistanceHR(int value)
+	{
+		m_iResistanceHR = value;
+	}
+
 	override bool RplSave(ScriptBitWriter writer)
-	{				
+	{
+		writer.WriteInt(m_iResistanceHR);
+
 		//Send JIP Camps
-		writer.WriteInt(m_Camps.Count()); 
+		writer.WriteInt(m_Camps.Count());
 		for(int i=0; i<m_Camps.Count(); i++)
 		{
 			OVT_CampData camp = m_Camps[i];
@@ -818,7 +890,9 @@ class OVT_ResistanceFactionManager: OVT_Component
 	}
 	
 	override bool RplLoad(ScriptBitReader reader)
-	{						
+	{
+		if(!reader.ReadInt(m_iResistanceHR)) return false;
+
 		//Receive JIP Camps
 		int length;
 		string s;

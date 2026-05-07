@@ -8,6 +8,7 @@ class OVT_EconomySaveData : EPF_ComponentSaveData
 {	
 	int m_iResistanceMoney = 0;
 	float m_fResistanceTax = 0;
+	int m_iResistanceSupplies = 0;
 	
 	override EPF_EReadResult ReadFrom(IEntity owner, GenericComponent component, EPF_ComponentSaveDataClass attributes)
 	{		
@@ -15,6 +16,7 @@ class OVT_EconomySaveData : EPF_ComponentSaveData
 		
 		m_iResistanceMoney = economy.GetResistanceMoney();
 		m_fResistanceTax = economy.m_fResistanceTax;
+		m_iResistanceSupplies = economy.m_iResistanceSupplies;
 		
 		return EPF_EReadResult.OK;
 	}
@@ -25,6 +27,7 @@ class OVT_EconomySaveData : EPF_ComponentSaveData
 		
 		economy.m_iResistanceMoney = m_iResistanceMoney;
 		economy.m_fResistanceTax = m_fResistanceTax;
+		economy.m_iResistanceSupplies = m_iResistanceSupplies;
 		
 		return EPF_EApplyResult.OK;
 	}

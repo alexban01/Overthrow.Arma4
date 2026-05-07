@@ -152,4 +152,24 @@ class OVT_DifficultySettings : ScriptAndConfig
 	int hrRegenIntervalTicks;
 	[Attribute(defvalue: "0.3", desc: "QRF resource multiplier when HR is at 0 (scales linearly to 1.0 at full HR)", category: "HR")]
 	float hrMinQRFMultiplier;
+
+	// Factories
+	[Attribute(defvalue: "2", desc: "Number of OF defender groups per factory", category: "Factories")]
+	int factoryDefenderGroups;
+	[Attribute(defvalue: "4", desc: "Production interval in 6-hour ticks (1=6h, 4=daily)", category: "Factories")]
+	int factoryProductionIntervalTicks;
+	[Attribute(defvalue: "50", desc: "Resistance supplies produced per factory per production tick", category: "Factories")]
+	int factorySuppliesPerTick;
+
+	// Resistance HR
+	[Attribute(defvalue: "500", desc: "Maximum resistance HR (manpower pool)", category: "Resistance HR")]
+	int resistanceHRMax;
+	[Attribute(defvalue: "0", desc: "Starting resistance HR", category: "Resistance HR")]
+	int resistanceHRStart;
+	[Attribute(defvalue: "1", desc: "Resistance HR regenerated per 1 town support point per 6h tick", category: "Resistance HR")]
+	float resistanceHRRegenPerSupport;
+	[Attribute(defvalue: "10", desc: "HR cost to recruit one AI soldier", category: "Resistance HR")]
+	int recruitHRCost;
+	[Attribute(defvalue: "25", desc: "Supply cost to recruit one AI soldier (base, scales with loadout)", category: "Resistance HR")]
+	int recruitSupplyCost;
 }

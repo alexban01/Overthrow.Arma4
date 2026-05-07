@@ -87,9 +87,10 @@ class OVT_EconomyManagerComponent: OVT_Component
 	protected int m_iHourPaidStock = -1; //!< Tracks the hour when stock was last replenished.
 	protected int m_iHourPaidRent = -1; //!< Tracks the hour when rent was last calculated.
 	
-	//Streamed to clients..			
+	//Streamed to clients..
 	int m_iResistanceMoney = 0; //!< Current amount of money held by the resistance faction. Streamed to clients.
 	float m_fResistanceTax = 0; //!< Current tax rate applied to player income, benefiting the resistance. Streamed to clients.
+	int m_iResistanceSupplies = 0; //!< Faction-wide supply pool produced by captured factories. Streamed to clients.
 	
 	//Events
 	ref ScriptInvoker m_OnPlayerMoneyChanged = new ScriptInvoker(); //!< Invoked when a player's money changes. Args: string persId, int newAmount
@@ -1562,9 +1563,34 @@ class OVT_EconomyManagerComponent: OVT_Component
 		}
 	}
 	
+	//------------------------------------------------------------------------------------------------
+	//! Gets the current amount of resistance supplies.
+	int GetResistanceSupplies()
+	{
+		return m_iResistanceSupplies;
+	}
+
+	//------------------------------------------------------------------------------------------------
+	//! Adds to the resistance supply pool and broadcasts the new value to clients.
+	void AddResistanceSupplies(int amount)
+	{
+		m_iResistanceSupplies += amount;
+		Rpc(RpcDo_SetResistanceSupplies, m_iResistanceSupplies);
+	}
+
+	//------------------------------------------------------------------------------------------------
+	//! Takes from the resistance supply pool. Returns false if insufficient supplies.
+	bool TakeResistanceSupplies(int amount)
+	{
+		if(m_iResistanceSupplies < amount) return false;
+		m_iResistanceSupplies -= amount;
+		Rpc(RpcDo_SetResistanceSupplies, m_iResistanceSupplies);
+		return true;
+	}
+
 	//RPC Methods
-	
-	
+
+
 	//------------------------------------------------------------------------------------------------
 	//! Saves component state for persistence or JIP.
 	override bool RplSave(ScriptBitWriter writer)
@@ -1591,12 +1617,14 @@ class OVT_EconomyManagerComponent: OVT_Component
 		}
 		
 		//Send JIP Gun Dealers
-		writer.WriteInt(m_aGunDealers.Count()); 
+		writer.WriteInt(m_aGunDealers.Count());
 		for(int i=0; i<m_aGunDealers.Count(); i++)
 		{
 			writer.WriteRplId(m_aGunDealers[i]);
 		}
-		
+
+		writer.WriteInt(m_iResistanceSupplies);
+
 		return true;
 	}
 	
@@ -1633,14 +1661,16 @@ class OVT_EconomyManagerComponent: OVT_Component
 			}
 		}
 		
-		//Recieve JIP gun dealers		
+		//Recieve JIP gun dealers
 		if (!reader.ReadInt(length)) return false;
 		for(int i=0; i<length; i++)
-		{			
+		{
 			if (!reader.ReadRplId(id)) return false;
 			m_aGunDealers.Insert(id);
 		}
-		
+
+		if (!reader.ReadInt(m_iResistanceSupplies)) return false;
+
 		return true;
 	}
 	
@@ -1703,5 +1733,14 @@ class OVT_EconomyManagerComponent: OVT_Component
 	{
 		m_fResistanceTax = amount;
 	}
-		
+
+	//------------------------------------------------------------------------------------------------
+	//! RPC called on clients to update the resistance supply pool locally.
+	//! \param[in] value The new supply amount.
+	[RplRpc(RplChannel.Reliable, RplRcver.Broadcast)]
+	protected void RpcDo_SetResistanceSupplies(int value)
+	{
+		m_iResistanceSupplies = value;
+	}
+
 }
