@@ -108,4 +108,48 @@ class OVT_DifficultySettings : ScriptAndConfig
 	
 	[Attribute("", UIWidgets.ResourcePickerThumbnail, "Items given to player when first spawned in")]
 	ref array<ResourceName> startingItems;
+
+	// War Level
+	[Attribute(defvalue: "150", desc: "Cumulative war points to reach War Level 2", category: "War Progression")]
+	int warLevelThreshold2;
+	[Attribute(defvalue: "400", desc: "Cumulative war points to reach War Level 3", category: "War Progression")]
+	int warLevelThreshold3;
+	[Attribute(defvalue: "800", desc: "Cumulative war points to reach War Level 4", category: "War Progression")]
+	int warLevelThreshold4;
+	[Attribute(defvalue: "1500", desc: "Cumulative war points to reach War Level 5", category: "War Progression")]
+	int warLevelThreshold5;
+	[Attribute(defvalue: "5", desc: "War points awarded per AI kill", category: "War Progression")]
+	int warPointsPerKill;
+	[Attribute(defvalue: "50", desc: "War points for liberating a village", category: "War Progression")]
+	int warPointsPerVillage;
+	[Attribute(defvalue: "150", desc: "War points for liberating a town", category: "War Progression")]
+	int warPointsPerTown;
+	[Attribute(defvalue: "350", desc: "War points for liberating a city", category: "War Progression")]
+	int warPointsPerCity;
+	[Attribute(defvalue: "100", desc: "War points for capturing a base", category: "War Progression")]
+	int warPointsPerBase;
+
+	// Aggression
+	[Attribute(defvalue: "0.1", desc: "Aggression gained per AI kill (0-100 scale)", category: "Aggression")]
+	float aggressionPerKill;
+	[Attribute(defvalue: "2.0", desc: "Aggression gained per town or base captured", category: "Aggression")]
+	float aggressionPerCapture;
+	[Attribute(defvalue: "0.1", desc: "Aggression lost every 15-minute tick", category: "Aggression")]
+	float aggressionDecayPerTick;
+	[Attribute(defvalue: "70.0", desc: "Aggression level at which enemy launches proactive attacks on player targets", category: "Aggression")]
+	float aggressionAttackThreshold;
+
+	// HR (Human Resources)
+	[Attribute(defvalue: "1000", desc: "Maximum enemy HR (manpower pool)", category: "HR")]
+	int hrMax;
+	[Attribute(defvalue: "1000", desc: "Starting HR value", category: "HR")]
+	int hrStart;
+	[Attribute(defvalue: "1", desc: "HR lost per AI kill", category: "HR")]
+	int hrLossPerKill;
+	[Attribute(defvalue: "100", desc: "HR regenerated per regen interval", category: "HR")]
+	int hrRegenPerWeek;
+	[Attribute(defvalue: "4", desc: "HR regen interval in 6-hour ticks (1=6h, 4=daily, 28=weekly)", category: "HR")]
+	int hrRegenIntervalTicks;
+	[Attribute(defvalue: "0.3", desc: "QRF resource multiplier when HR is at 0 (scales linearly to 1.0 at full HR)", category: "HR")]
+	float hrMinQRFMultiplier;
 }

@@ -103,6 +103,13 @@ class OVT_OccupyingFactionManager: OVT_Component
 
 	int m_iResources;
 	float m_iThreat;
+
+	int m_iWarLevel = 1;
+	int m_iWarPoints = 0;
+	float m_fAggression = 0;
+	int m_iHR = 1000;
+	int m_iHRRegenTicks = 0;
+
 	ref array<ref OVT_BaseData> m_Bases = new array<ref OVT_BaseData>;
 	ref array<ref OVT_RadioTowerData> m_RadioTowers = new array<ref OVT_RadioTowerData>;
 
@@ -160,6 +167,7 @@ class OVT_OccupyingFactionManager: OVT_Component
 		m_iOccupyingFactionIndex = GetGame().GetFactionManager().GetFactionIndex(occupyingFaction);
 
 		OVT_Global.GetTowns().m_OnTownControlChange.Insert(OnTownControlChanged);
+		m_OnAIKilled.Insert(OnAIKilledWarProgression);
 
 		InitializeBases();
 	}
@@ -208,6 +216,11 @@ class OVT_OccupyingFactionManager: OVT_Component
 		OVT_Global.GetConfig().m_iOccupyingFactionIndex = -1;
 		m_iThreat = m_Config.m_Difficulty.baseThreat;
 		m_iResources = m_Config.m_Difficulty.maxQRF;
+		m_iWarLevel = 1;
+		m_iWarPoints = 0;
+		m_fAggression = 0;
+		m_iHR = m_Config.m_Difficulty.hrStart;
+		m_iHRRegenTicks = 0;
 
 		int factionIndex = OVT_Global.GetConfig().GetOccupyingFactionIndex();
 
@@ -357,6 +370,18 @@ class OVT_OccupyingFactionManager: OVT_Component
 		if(town.faction == m_iPlayerFactionIndex)
 		{
 			m_iThreat += town.size * 150;
+
+			OVT_DifficultySettings diff = OVT_Global.GetDifficulty();
+			int wp;
+			switch (town.size)
+			{
+				case 1:  wp = diff.warPointsPerVillage; break;
+				case 2:  wp = diff.warPointsPerTown;    break;
+				case 3:  wp = diff.warPointsPerCity;    break;
+				default: wp = diff.warPointsPerCity;    break;
+			}
+			AddWarPoints(wp);
+			m_fAggression = Math.Min(100, m_fAggression + diff.aggressionPerCapture);
 		}
 	}
 
@@ -653,6 +678,9 @@ class OVT_OccupyingFactionManager: OVT_Component
 		if(base.IsOccupyingFaction())
 		{
 			m_iThreat += 250;
+			OVT_DifficultySettings diff = OVT_Global.GetDifficulty();
+			AddWarPoints(diff.warPointsPerBase);
+			m_fAggression = Math.Min(100, m_fAggression + diff.aggressionPerCapture);
 			OVT_Global.GetNotify().SendTextNotification("BaseControlledResistance",-1,townName);
 			OVT_Global.GetNotify().SendExternalNotifications("BaseControlledResistance",townName);
 		}else{
@@ -885,6 +913,17 @@ class OVT_OccupyingFactionManager: OVT_Component
 		{
 			int newResources = GainResources();
 
+			// HR regeneration — fires every hrRegenIntervalTicks six-hour ticks
+			int regenInterval = Math.Max(1, OVT_Global.GetDifficulty().hrRegenIntervalTicks);
+			m_iHRRegenTicks++;
+			if (m_iHRRegenTicks >= regenInterval)
+			{
+				m_iHRRegenTicks = 0;
+				m_iHR = Math.Min(OVT_Global.GetDifficulty().hrMax, m_iHR + OVT_Global.GetDifficulty().hrRegenPerWeek);
+				Print("[Overthrow.OccupyingFactionManager] HR regenerated to: " + m_iHR.ToString());
+				Rpc(RpcDo_SetWarProgression, m_fAggression, m_iHR);
+			}
+
 			int toSpend = Math.Floor((float)newResources * 0.8);
 			UpdateKnownTargets();
 
@@ -938,6 +977,28 @@ class OVT_OccupyingFactionManager: OVT_Component
 			}
 		}
 
+		// Aggression-driven proactive attack on known player targets (FOBs, camps)
+		if (time.m_iMinutes == 0
+			&& m_fAggression >= OVT_Global.GetDifficulty().aggressionAttackThreshold
+			&& m_bCounterAttackTimeout == 0
+			&& !m_CurrentQRF)
+		{
+			OVT_TargetData target = GetNearestKnownTarget(vector.Zero);
+			if (target && !target.completed)
+			{
+				OVT_BaseData nearBase = GetNearestBase(target.location);
+				if (nearBase && nearBase.IsOccupyingFaction())
+				{
+					Print("[Overthrow.OccupyingFactionManager] High aggression, launching proactive attack on known target");
+					OVT_BaseControllerComponent attackBase = GetBase(nearBase.entId);
+					StartBaseQRF(attackBase);
+					int aggroTimeout = Math.RandomIntInclusive(m_Config.m_Difficulty.counterAttackTimeout - 20, m_Config.m_Difficulty.counterAttackTimeout + 20);
+					m_bCounterAttackTimeout = aggroTimeout;
+					return;
+				}
+			}
+		}
+
 		//Every 15 mins reduce threat and check if we wanna start a battle for a town
 		if(time.m_iMinutes == 0
 			|| time.m_iMinutes == 15
@@ -947,8 +1008,13 @@ class OVT_OccupyingFactionManager: OVT_Component
 			int threatReduce = Math.Ceil((float)m_iThreat * OVT_Global.GetDifficulty().threatReductionFactor);
 			m_iThreat -= threatReduce;
 			if(m_iThreat < 0) m_iThreat = 0;
-			
+
 			Print("[Overthrow.OccupyingFactionManager] Reduced Threat to: " + m_iThreat.ToString());
+
+			OVT_DifficultySettings diffTick = OVT_Global.GetDifficulty();
+			m_fAggression = Math.Max(0, m_fAggression - diffTick.aggressionDecayPerTick);
+			Print("[Overthrow.OccupyingFactionManager] Aggression: " + m_fAggression.ToString());
+			Rpc(RpcDo_SetWarProgression, m_fAggression, m_iHR);
 
 			int playerFaction = m_Config.GetPlayerFactionIndex();
 			int occupyingFaction = m_Config.GetOccupyingFactionIndex();
@@ -1206,6 +1272,62 @@ class OVT_OccupyingFactionManager: OVT_Component
 		m_OnAIKilled.Invoke(ai, instigator);
 	}
 
+	void OnAIKilledWarProgression(IEntity killed, IEntity instigator)
+	{
+		if (!Replication.IsServer()) return;
+		OVT_DifficultySettings diff = OVT_Global.GetDifficulty();
+		AddWarPoints(diff.warPointsPerKill);
+		m_iHR = Math.Max(0, m_iHR - diff.hrLossPerKill);
+		m_fAggression = Math.Min(100, m_fAggression + diff.aggressionPerKill);
+		// No per-kill RPC — aggression/HR are batched at the 15-min tick to avoid flooding
+	}
+
+	void AddWarPoints(int points)
+	{
+		if (m_iWarLevel >= 5) return;
+		m_iWarPoints += points;
+		CheckWarLevelAdvance();
+	}
+
+	protected void CheckWarLevelAdvance()
+	{
+		OVT_DifficultySettings diff = OVT_Global.GetDifficulty();
+		int threshold;
+		switch (m_iWarLevel)
+		{
+			case 1: threshold = diff.warLevelThreshold2; break;
+			case 2: threshold = diff.warLevelThreshold3; break;
+			case 3: threshold = diff.warLevelThreshold4; break;
+			case 4: threshold = diff.warLevelThreshold5; break;
+			default: return;
+		}
+		if (m_iWarPoints < threshold) return;
+		m_iWarLevel++;
+		Print("[Overthrow.OccupyingFactionManager] War Level advanced to: " + m_iWarLevel.ToString() + " (points: " + m_iWarPoints.ToString() + ")");
+		OVT_Global.GetNotify().SendTextNotification("WarLevelAdvanced", -1, m_iWarLevel.ToString());
+		OVT_Global.GetNotify().SendExternalNotifications("WarLevelAdvanced", m_iWarLevel.ToString());
+		Rpc(RpcDo_SetWarLevel, m_iWarLevel, m_iWarPoints);
+		if (m_iWarLevel < 5) CheckWarLevelAdvance();
+	}
+
+	float GetHRQRFMultiplier()
+	{
+		OVT_DifficultySettings diff = OVT_Global.GetDifficulty();
+		if (diff.hrMax <= 0) return 1.0;
+		float ratio = (float)m_iHR / (float)diff.hrMax;
+		return diff.hrMinQRFMultiplier + ratio * (1.0 - diff.hrMinQRFMultiplier);
+	}
+
+	int GetWarLevelQRFMax()
+	{
+		float mul = 1.0 + (float)(m_iWarLevel - 1) * 0.25;
+		return Math.Round(OVT_Global.GetConfig().m_Difficulty.maxQRF * mul);
+	}
+
+	int GetWarLevel()     { return m_iWarLevel; }
+	float GetAggression() { return m_fAggression; }
+	int GetHR()           { return m_iHR; }
+
 	//RPC Methods
 
 	override bool RplSave(ScriptBitWriter writer)
@@ -1236,6 +1358,11 @@ class OVT_OccupyingFactionManager: OVT_Component
 		writer.WriteInt(m_iQRFPoints);
 		writer.WriteInt(m_iQRFTimer);
 		writer.WriteBool(m_bQRFActive);
+
+		writer.WriteInt(m_iWarLevel);
+		writer.WriteInt(m_iWarPoints);
+		writer.WriteFloat(m_fAggression);
+		writer.WriteInt(m_iHR);
 
 		return true;
 	}
@@ -1281,6 +1408,11 @@ class OVT_OccupyingFactionManager: OVT_Component
 		if (!reader.ReadInt(m_iQRFPoints)) return false;
 		if (!reader.ReadInt(m_iQRFTimer)) return false;
 		if (!reader.ReadBool(m_bQRFActive)) return false;
+
+		if (!reader.ReadInt(m_iWarLevel))     return false;
+		if (!reader.ReadInt(m_iWarPoints))    return false;
+		if (!reader.ReadFloat(m_fAggression)) return false;
+		if (!reader.ReadInt(m_iHR))           return false;
 
 		return true;
 	}
@@ -1342,6 +1474,20 @@ class OVT_OccupyingFactionManager: OVT_Component
 		m_bQRFActive = false;
 		m_iCurrentQRFBase = -1;
 		m_iCurrentQRFTown = -1;
+	}
+
+	[RplRpc(RplChannel.Reliable, RplRcver.Broadcast)]
+	protected void RpcDo_SetWarLevel(int warLevel, int warPoints)
+	{
+		m_iWarLevel = warLevel;
+		m_iWarPoints = warPoints;
+	}
+
+	[RplRpc(RplChannel.Reliable, RplRcver.Broadcast)]
+	protected void RpcDo_SetWarProgression(float aggression, int hr)
+	{
+		m_fAggression = aggression;
+		m_iHR = hr;
 	}
 
 }

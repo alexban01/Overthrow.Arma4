@@ -5,19 +5,30 @@ class OVT_OccupyingFactionSaveDataClass : EPF_ComponentSaveDataClass
 
 [EDF_DbName.Automatic()]
 class OVT_OccupyingFactionSaveData : EPF_ComponentSaveData
-{	
+{
 	int m_iResources;
 	float m_iThreat;
 	ref array<ref OVT_BaseData> m_Bases;
 	ref array<ref OVT_RadioTowerData> m_RadioTowers;
 	string m_sOccupyingFactionKey;
+
+	int m_iWarLevel;
+	int m_iWarPoints;
+	float m_fAggression;
+	int m_iHR;
+	int m_iHRRegenTicks;
 	
 	override EPF_EReadResult ReadFrom(IEntity owner, GenericComponent component, EPF_ComponentSaveDataClass attributes)
 	{		
 		OVT_OccupyingFactionManager of = OVT_OccupyingFactionManager.Cast(component);
 		
 		m_iResources = of.m_iResources;
-		m_iThreat = of.m_iThreat;		
+		m_iThreat = of.m_iThreat;
+		m_iWarLevel = of.m_iWarLevel;
+		m_iWarPoints = of.m_iWarPoints;
+		m_fAggression = of.m_fAggression;
+		m_iHR = of.m_iHR;
+		m_iHRRegenTicks = of.m_iHRRegenTicks;
 		m_RadioTowers = of.m_RadioTowers;
 		m_sOccupyingFactionKey = OVT_Global.GetConfig().m_sOccupyingFaction;
 		
@@ -65,7 +76,14 @@ class OVT_OccupyingFactionSaveData : EPF_ComponentSaveData
 		OVT_OccupyingFactionManager of = OVT_OccupyingFactionManager.Cast(component);
 		
 		of.m_iResources = m_iResources;
-		of.m_iThreat = m_iThreat;		
+		of.m_iThreat = m_iThreat;
+		of.m_iWarLevel = m_iWarLevel;
+		if (of.m_iWarLevel < 1) of.m_iWarLevel = 1;
+		of.m_iWarPoints = m_iWarPoints;
+		of.m_fAggression = m_fAggression;
+		of.m_iHR = m_iHR;
+		if (of.m_iHR <= 0) of.m_iHR = OVT_Global.GetDifficulty().hrStart;
+		of.m_iHRRegenTicks = m_iHRRegenTicks;
 		of.m_bDistributeInitial = false;
 		
 		OVT_Global.GetConfig().SetOccupyingFaction(m_sOccupyingFactionKey);

@@ -250,6 +250,102 @@ FrameWidgetClass {
             }
            }
           }
+          ButtonWidgetClass "{7B0000DAABBCCD01}" : "{C9DF0E6590F6C388}UI/layouts/WidgetLibrary/SpinBox/WLib_SpinBox.layout" {
+           Name "CustomHRMax"
+           Slot LayoutSlot "{7B0000DAABBCCD02}" {
+            HorizontalAlign 3
+            Padding 4 4 4 4
+           }
+           components {
+            SCR_SpinBoxComponent "{5472C6CBC0640458}" {
+             m_sLabel "Enemy manpower pool"
+            }
+           }
+          }
+          ButtonWidgetClass "{7B0000EAABBCCD01}" : "{C9DF0E6590F6C388}UI/layouts/WidgetLibrary/SpinBox/WLib_SpinBox.layout" {
+           Name "CustomHRRegen"
+           Slot LayoutSlot "{7B0000EAABBCCD02}" {
+            HorizontalAlign 3
+            Padding 4 4 4 4
+           }
+           components {
+            SCR_SpinBoxComponent "{5472C6CBC0640458}" {
+             m_sLabel "Manpower regen amount"
+            }
+           }
+          }
+          ButtonWidgetClass "{7B00014AABBCCD01}" : "{C9DF0E6590F6C388}UI/layouts/WidgetLibrary/SpinBox/WLib_SpinBox.layout" {
+           Name "CustomHRRegenInterval"
+           Slot LayoutSlot "{7B00014AABBCCD02}" {
+            HorizontalAlign 3
+            Padding 4 4 4 4
+           }
+           components {
+            SCR_SpinBoxComponent "{5472C6CBC0640458}" {
+             m_sLabel "Regen interval (6h ticks)"
+            }
+           }
+          }
+          ButtonWidgetClass "{7B0000FAABBCCD01}" : "{C9DF0E6590F6C388}UI/layouts/WidgetLibrary/SpinBox/WLib_SpinBox.layout" {
+           Name "CustomWL2Threshold"
+           Slot LayoutSlot "{7B0000FAABBCCD02}" {
+            HorizontalAlign 3
+            Padding 4 4 4 4
+           }
+           components {
+            SCR_SpinBoxComponent "{5472C6CBC0640458}" {
+             m_sLabel "War level 2 threshold"
+            }
+           }
+          }
+          ButtonWidgetClass "{7B00010AABBCCD01}" : "{C9DF0E6590F6C388}UI/layouts/WidgetLibrary/SpinBox/WLib_SpinBox.layout" {
+           Name "CustomWL3Threshold"
+           Slot LayoutSlot "{7B00010AABBCCD02}" {
+            HorizontalAlign 3
+            Padding 4 4 4 4
+           }
+           components {
+            SCR_SpinBoxComponent "{5472C6CBC0640458}" {
+             m_sLabel "War level 3 threshold"
+            }
+           }
+          }
+          ButtonWidgetClass "{7B00011AABBCCD01}" : "{C9DF0E6590F6C388}UI/layouts/WidgetLibrary/SpinBox/WLib_SpinBox.layout" {
+           Name "CustomWL4Threshold"
+           Slot LayoutSlot "{7B00011AABBCCD02}" {
+            HorizontalAlign 3
+            Padding 4 4 4 4
+           }
+           components {
+            SCR_SpinBoxComponent "{5472C6CBC0640458}" {
+             m_sLabel "War level 4 threshold"
+            }
+           }
+          }
+          ButtonWidgetClass "{7B00012AABBCCD01}" : "{C9DF0E6590F6C388}UI/layouts/WidgetLibrary/SpinBox/WLib_SpinBox.layout" {
+           Name "CustomWL5Threshold"
+           Slot LayoutSlot "{7B00012AABBCCD02}" {
+            HorizontalAlign 3
+            Padding 4 4 4 4
+           }
+           components {
+            SCR_SpinBoxComponent "{5472C6CBC0640458}" {
+             m_sLabel "War level 5 threshold"
+            }
+           }
+          }
+          ButtonWidgetClass "{7B00013AABBCCD01}" : "{C9DF0E6590F6C388}UI/layouts/WidgetLibrary/SpinBox/WLib_SpinBox.layout" {
+           Name "CustomAggressionThreshold"
+           Slot LayoutSlot "{7B00013AABBCCD02}" {
+            HorizontalAlign 3
+            Padding 4 4 4 4
+           }
+           components {
+            SCR_SpinBoxComponent "{5472C6CBC0640458}" {
+             m_sLabel "Aggression attack threshold"
+            }
+           }
+          }
          }
         }
        }

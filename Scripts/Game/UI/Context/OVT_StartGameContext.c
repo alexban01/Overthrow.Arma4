@@ -10,6 +10,14 @@ class OVT_StartGameContext : OVT_UIContext
 	protected ref array<float> m_aDetectionRangeValues;
 	protected ref array<float> m_aDisguiseValues;
 	protected ref array<int> m_aMaxQRFValues;
+	protected ref array<int> m_aHRMaxValues;
+	protected ref array<int> m_aHRRegenValues;
+	protected ref array<int> m_aWLThreshold2Values;
+	protected ref array<int> m_aWLThreshold3Values;
+	protected ref array<int> m_aWLThreshold4Values;
+	protected ref array<int> m_aWLThreshold5Values;
+	protected ref array<float> m_aAggressionThresholdValues;
+	protected ref array<int> m_aHRRegenIntervalValues;
 
 	override void OnShow()
 	{
@@ -217,6 +225,111 @@ class OVT_StartGameContext : OVT_UIContext
 		foreach(int qv : m_aMaxQRFValues)
 			maxQRFSpin.AddItem(qv.ToString(), false, null);
 		maxQRFSpin.m_OnChanged.Insert(OnSpinMaxQRF);
+
+		m_aHRMaxValues = new array<int>();
+		m_aHRMaxValues.Insert(250);
+		m_aHRMaxValues.Insert(500);
+		m_aHRMaxValues.Insert(750);
+		m_aHRMaxValues.Insert(1000);
+		m_aHRMaxValues.Insert(1500);
+		m_aHRMaxValues.Insert(2000);
+
+		SCR_SpinBoxComponent hrMaxSpin = GetCustomSpin("CustomHRMax");
+		foreach(int hv : m_aHRMaxValues)
+			hrMaxSpin.AddItem(hv.ToString(), false, null);
+		hrMaxSpin.m_OnChanged.Insert(OnSpinHRMax);
+
+		m_aHRRegenValues = new array<int>();
+		m_aHRRegenValues.Insert(25);
+		m_aHRRegenValues.Insert(50);
+		m_aHRRegenValues.Insert(75);
+		m_aHRRegenValues.Insert(100);
+		m_aHRRegenValues.Insert(150);
+		m_aHRRegenValues.Insert(200);
+		m_aHRRegenValues.Insert(300);
+
+		SCR_SpinBoxComponent hrRegenSpin = GetCustomSpin("CustomHRRegen");
+		foreach(int rv : m_aHRRegenValues)
+			hrRegenSpin.AddItem(rv.ToString(), false, null);
+		hrRegenSpin.m_OnChanged.Insert(OnSpinHRRegen);
+
+		m_aWLThreshold2Values = new array<int>();
+		m_aWLThreshold2Values.Insert(1);
+		m_aWLThreshold2Values.Insert(50);
+		m_aWLThreshold2Values.Insert(100);
+		m_aWLThreshold2Values.Insert(150);
+		m_aWLThreshold2Values.Insert(250);
+		m_aWLThreshold2Values.Insert(500);
+
+		SCR_SpinBoxComponent wl2Spin = GetCustomSpin("CustomWL2Threshold");
+		foreach(int wv : m_aWLThreshold2Values)
+			wl2Spin.AddItem(wv.ToString(), false, null);
+		wl2Spin.m_OnChanged.Insert(OnSpinWL2Threshold);
+
+		m_aWLThreshold3Values = new array<int>();
+		m_aWLThreshold3Values.Insert(6);
+		m_aWLThreshold3Values.Insert(100);
+		m_aWLThreshold3Values.Insert(200);
+		m_aWLThreshold3Values.Insert(300);
+		m_aWLThreshold3Values.Insert(400);
+		m_aWLThreshold3Values.Insert(600);
+		m_aWLThreshold3Values.Insert(1000);
+
+		SCR_SpinBoxComponent wl3Spin = GetCustomSpin("CustomWL3Threshold");
+		foreach(int wv : m_aWLThreshold3Values)
+			wl3Spin.AddItem(wv.ToString(), false, null);
+		wl3Spin.m_OnChanged.Insert(OnSpinWL3Threshold);
+
+		m_aWLThreshold4Values = new array<int>();
+		m_aWLThreshold4Values.Insert(200);
+		m_aWLThreshold4Values.Insert(400);
+		m_aWLThreshold4Values.Insert(600);
+		m_aWLThreshold4Values.Insert(800);
+		m_aWLThreshold4Values.Insert(1200);
+		m_aWLThreshold4Values.Insert(2000);
+
+		SCR_SpinBoxComponent wl4Spin = GetCustomSpin("CustomWL4Threshold");
+		foreach(int wv : m_aWLThreshold4Values)
+			wl4Spin.AddItem(wv.ToString(), false, null);
+		wl4Spin.m_OnChanged.Insert(OnSpinWL4Threshold);
+
+		m_aWLThreshold5Values = new array<int>();
+		m_aWLThreshold5Values.Insert(500);
+		m_aWLThreshold5Values.Insert(750);
+		m_aWLThreshold5Values.Insert(1000);
+		m_aWLThreshold5Values.Insert(1500);
+		m_aWLThreshold5Values.Insert(2500);
+		m_aWLThreshold5Values.Insert(4000);
+
+		SCR_SpinBoxComponent wl5Spin = GetCustomSpin("CustomWL5Threshold");
+		foreach(int wv : m_aWLThreshold5Values)
+			wl5Spin.AddItem(wv.ToString(), false, null);
+		wl5Spin.m_OnChanged.Insert(OnSpinWL5Threshold);
+
+		m_aAggressionThresholdValues = new array<float>();
+		m_aAggressionThresholdValues.Insert(30.0);
+		m_aAggressionThresholdValues.Insert(50.0);
+		m_aAggressionThresholdValues.Insert(70.0);
+		m_aAggressionThresholdValues.Insert(90.0);
+		m_aAggressionThresholdValues.Insert(100.0);
+
+		SCR_SpinBoxComponent aggrSpin = GetCustomSpin("CustomAggressionThreshold");
+		foreach(float av : m_aAggressionThresholdValues)
+			aggrSpin.AddItem(av.ToString(), false, null);
+		aggrSpin.m_OnChanged.Insert(OnSpinAggressionThreshold);
+
+		m_aHRRegenIntervalValues = new array<int>();
+		m_aHRRegenIntervalValues.Insert(1);
+		m_aHRRegenIntervalValues.Insert(2);
+		m_aHRRegenIntervalValues.Insert(4);
+		m_aHRRegenIntervalValues.Insert(8);
+		m_aHRRegenIntervalValues.Insert(14);
+		m_aHRRegenIntervalValues.Insert(28);
+
+		SCR_SpinBoxComponent regenIntervalSpin = GetCustomSpin("CustomHRRegenInterval");
+		foreach(int ri : m_aHRRegenIntervalValues)
+			regenIntervalSpin.AddItem(ri.ToString(), false, null);
+		regenIntervalSpin.m_OnChanged.Insert(OnSpinHRRegenInterval);
 	}
 
 	protected void UpdateCustomPanelVisibility(OVT_DifficultySettings preset)
@@ -244,6 +357,14 @@ class OVT_StartGameContext : OVT_UIContext
 		GetCustomSpin("CustomDisguise").SetCurrentItem(FindClosestFloat(m_aDisguiseValues, d.baseDisguiseEffectiveness));
 		GetCustomSpin("CustomQRFMode").SetCurrentItem(d.QRFFastTravelMode);
 		GetCustomSpin("CustomMaxQRF").SetCurrentItem(FindClosestInt(m_aMaxQRFValues, d.maxQRF));
+		GetCustomSpin("CustomHRMax").SetCurrentItem(FindClosestInt(m_aHRMaxValues, d.hrMax));
+		GetCustomSpin("CustomHRRegen").SetCurrentItem(FindClosestInt(m_aHRRegenValues, d.hrRegenPerWeek));
+		GetCustomSpin("CustomHRRegenInterval").SetCurrentItem(FindClosestInt(m_aHRRegenIntervalValues, d.hrRegenIntervalTicks));
+		GetCustomSpin("CustomWL2Threshold").SetCurrentItem(FindClosestInt(m_aWLThreshold2Values, d.warLevelThreshold2));
+		GetCustomSpin("CustomWL3Threshold").SetCurrentItem(FindClosestInt(m_aWLThreshold3Values, d.warLevelThreshold3));
+		GetCustomSpin("CustomWL4Threshold").SetCurrentItem(FindClosestInt(m_aWLThreshold4Values, d.warLevelThreshold4));
+		GetCustomSpin("CustomWL5Threshold").SetCurrentItem(FindClosestInt(m_aWLThreshold5Values, d.warLevelThreshold5));
+		GetCustomSpin("CustomAggressionThreshold").SetCurrentItem(FindClosestFloat(m_aAggressionThresholdValues, d.aggressionAttackThreshold));
 	}
 
 	protected int FindClosestInt(array<int> values, int target)
@@ -313,6 +434,25 @@ class OVT_StartGameContext : OVT_UIContext
 		dst.wantedReductionMultiplier = src.wantedReductionMultiplier;
 		dst.detectionRangeMultiplier = src.detectionRangeMultiplier;
 		dst.startingItems = src.startingItems;
+		dst.warLevelThreshold2 = src.warLevelThreshold2;
+		dst.warLevelThreshold3 = src.warLevelThreshold3;
+		dst.warLevelThreshold4 = src.warLevelThreshold4;
+		dst.warLevelThreshold5 = src.warLevelThreshold5;
+		dst.warPointsPerKill = src.warPointsPerKill;
+		dst.warPointsPerVillage = src.warPointsPerVillage;
+		dst.warPointsPerTown = src.warPointsPerTown;
+		dst.warPointsPerCity = src.warPointsPerCity;
+		dst.warPointsPerBase = src.warPointsPerBase;
+		dst.aggressionPerKill = src.aggressionPerKill;
+		dst.aggressionPerCapture = src.aggressionPerCapture;
+		dst.aggressionDecayPerTick = src.aggressionDecayPerTick;
+		dst.aggressionAttackThreshold = src.aggressionAttackThreshold;
+		dst.hrMax = src.hrMax;
+		dst.hrStart = src.hrStart;
+		dst.hrLossPerKill = src.hrLossPerKill;
+		dst.hrRegenPerWeek = src.hrRegenPerWeek;
+		dst.hrRegenIntervalTicks = src.hrRegenIntervalTicks;
+		dst.hrMinQRFMultiplier = src.hrMinQRFMultiplier;
 	}
 
 	protected void OnSpinOccupyingFaction(SCR_SpinBoxComponent spinner, int index)
@@ -451,6 +591,46 @@ class OVT_StartGameContext : OVT_UIContext
 	protected void OnSpinMaxQRF(SCR_SpinBoxComponent spinner, int index)
 	{
 		OVT_Global.GetConfig().m_Difficulty.maxQRF = m_aMaxQRFValues[index];
+	}
+
+	protected void OnSpinHRMax(SCR_SpinBoxComponent spinner, int index)
+	{
+		OVT_Global.GetConfig().m_Difficulty.hrMax = m_aHRMaxValues[index];
+	}
+
+	protected void OnSpinHRRegen(SCR_SpinBoxComponent spinner, int index)
+	{
+		OVT_Global.GetConfig().m_Difficulty.hrRegenPerWeek = m_aHRRegenValues[index];
+	}
+
+	protected void OnSpinWL2Threshold(SCR_SpinBoxComponent spinner, int index)
+	{
+		OVT_Global.GetConfig().m_Difficulty.warLevelThreshold2 = m_aWLThreshold2Values[index];
+	}
+
+	protected void OnSpinWL3Threshold(SCR_SpinBoxComponent spinner, int index)
+	{
+		OVT_Global.GetConfig().m_Difficulty.warLevelThreshold3 = m_aWLThreshold3Values[index];
+	}
+
+	protected void OnSpinWL4Threshold(SCR_SpinBoxComponent spinner, int index)
+	{
+		OVT_Global.GetConfig().m_Difficulty.warLevelThreshold4 = m_aWLThreshold4Values[index];
+	}
+
+	protected void OnSpinWL5Threshold(SCR_SpinBoxComponent spinner, int index)
+	{
+		OVT_Global.GetConfig().m_Difficulty.warLevelThreshold5 = m_aWLThreshold5Values[index];
+	}
+
+	protected void OnSpinAggressionThreshold(SCR_SpinBoxComponent spinner, int index)
+	{
+		OVT_Global.GetConfig().m_Difficulty.aggressionAttackThreshold = m_aAggressionThresholdValues[index];
+	}
+
+	protected void OnSpinHRRegenInterval(SCR_SpinBoxComponent spinner, int index)
+	{
+		OVT_Global.GetConfig().m_Difficulty.hrRegenIntervalTicks = m_aHRRegenIntervalValues[index];
 	}
 
 	protected void StartGame()

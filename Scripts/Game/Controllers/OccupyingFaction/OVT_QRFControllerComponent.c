@@ -221,8 +221,9 @@ class OVT_QRFControllerComponent: OVT_Component
 		
 		int resources = m_OccupyingFaction.m_iResources;
 		if(resources <= 400) resources = 400; //Emergency resources (minimum size QRF)
-		
-		int max = OVT_Global.GetConfig().m_Difficulty.maxQRF;
+
+		// War level raises the QRF resource cap; HR reduces effective force size
+		int max = m_OccupyingFaction.GetWarLevelQRFMax();
 		int numPlayersOnline = GetGame().GetPlayerManager().GetPlayerCount();
 		Goodqrfpos = "0 0 0";
 		Goodqrfbasepos = "0 0 0";
@@ -243,7 +244,12 @@ class OVT_QRFControllerComponent: OVT_Component
 		{
 			max *= 2;
 		}
-		
+
+		// Apply HR multiplier: depleted manpower shrinks the effective QRF
+		float hrMul = m_OccupyingFaction.GetHRQRFMultiplier();
+		resources = Math.Round((float)resources * hrMul);
+		if (resources <= 400) resources = 400; // restore emergency minimum after HR reduction
+
 		if(resources > max)
 		{
 			resources = max;
@@ -298,11 +304,22 @@ class OVT_QRFControllerComponent: OVT_Component
 		return spent;
 	}
 	
+	protected ResourceName GetGroupForWarLevel(OVT_Faction faction)
+	{
+		int wl = m_OccupyingFaction.GetWarLevel();
+		float r = s_AIRandomGenerator.RandFloat01();
+		if (wl >= 4 && r > 0.6 && faction.m_aGroupSpecialPrefabSlots.Count() > 0)
+			return faction.m_aGroupSpecialPrefabSlots.GetRandomElement();
+		if (wl >= 2 && r > 0.5 && faction.m_aHeavyInfantryPrefabSlots.Count() > 0)
+			return faction.m_aHeavyInfantryPrefabSlots.GetRandomElement();
+		return faction.m_aGroupPrefabSlots.GetRandomElement();
+	}
+
 	protected int SpawnTroops(vector pos, vector targetPos)
 	{
 		OVT_Faction faction = OVT_Global.GetConfig().GetOccupyingFaction();
-						
-		ResourceName res = faction.m_aGroupPrefabSlots.GetRandomElement();
+
+		ResourceName res = GetGroupForWarLevel(faction);
 		
 		m_aSpawnQueue.Insert(res);
 		m_aSpawnPositions.Insert(pos);

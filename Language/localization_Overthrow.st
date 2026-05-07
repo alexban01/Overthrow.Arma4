@@ -7851,5 +7851,22 @@ StringTable {
    Author "Aaron Static"
    LastChanged "CrioUA"
   }
+  CustomStringTableItem "{6B2C3D4E5F6A7B8F}" {
+   Id "OVT-Msg-WarLevelAdvanced"
+   Target_en_us "War has escalated to Level %1!"
+   Comment ""
+   DevNote ""
+   Repro ""
+   ActorGender NONE
+   Terminology NONE
+   Status DEVELOPMENT_PENDING
+   NonTranslatable 0
+   MaxLength 0
+   Modified 1746662400
+   Author "Aaron Static"
+   LastChanged "parkj_c3c9hji"
+   ImageLink ""
+   Hidden 0
+  }
  }
 }

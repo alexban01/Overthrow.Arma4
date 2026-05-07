@@ -1,0 +1,163 @@
+OverlayWidgetClass {
+ Name "root"
+ Clipping False
+ components {
+  SCR_WidgetExportRuleRoot "{5970CDAF8DD975FB}" {
+   DestinationPath "{EC9B6EE4FCC71C2E}Scripts/Game/UI/HUD"
+   ScriptAddon "$Overthrow:"
+   GenerateFullWidgetPath 0
+   ScriptClassNamePrefix "OVT_"
+  }
+ }
+ {
+  FrameWidgetClass "{6A1B2C3D4E5F6A7B}" {
+   Name "Frame0"
+   Slot OverlayWidgetSlot "{6A1B2C3D4E5F6A7C}" {
+    HorizontalAlign 1
+    VerticalAlign 0
+    Padding 0 10 0 0
+   }
+   Opacity 0.9
+   {
+    VerticalLayoutWidgetClass "{6A1B2C3D4E5F6A7D}" {
+     Name "WarPanel"
+     Slot FrameWidgetSlot "{6A1B2C3D4E5F6A7E}" {
+      Anchor 0 0 1 1
+      PositionX -877.919
+      OffsetLeft -877.919
+      PositionY 573.249
+      OffsetTop 573.249
+      SizeX 0
+      OffsetRight 877.919
+      SizeY 0
+      OffsetBottom -573.249
+      SizeToContent 1
+     }
+     "Inherit Color" 1
+     {
+      HorizontalLayoutWidgetClass "{6A1B2C3D4E5F6A7F}" {
+       Name "WarLevel"
+       Slot LayoutSlot "{6A1B2C3D4E5F6A80}" {
+        HorizontalAlign 1
+        Padding 0 2 0 6
+       }
+       "Inherit Color" 1
+       {
+        ImageWidgetClass "{6A1B2C3D4E5F6A81}" {
+         Name "Star0"
+         Slot LayoutSlot "{6A1B2C3D4E5F6A82}" {
+         }
+         "Is Visible" 1
+         Texture "{9DA6A249AD4D71C4}UI/Textures/Icons/icons_wrapperUI-48.imageset"
+         Image "favourite"
+         Size 30 30
+        }
+        ImageWidgetClass "{6A1B2C3D4E5F6A83}" {
+         Name "Star1"
+         Slot LayoutSlot "{6A1B2C3D4E5F6A82}" {
+         }
+         "Is Visible" 0
+         Texture "{9DA6A249AD4D71C4}UI/Textures/Icons/icons_wrapperUI-48.imageset"
+         Image "favourite"
+         Size 30 30
+        }
+        ImageWidgetClass "{6A1B2C3D4E5F6A84}" {
+         Name "Star2"
+         Slot LayoutSlot "{6A1B2C3D4E5F6A82}" {
+         }
+         "Is Visible" 0
+         Texture "{9DA6A249AD4D71C4}UI/Textures/Icons/icons_wrapperUI-48.imageset"
+         Image "favourite"
+         Size 30 30
+        }
+        ImageWidgetClass "{6A1B2C3D4E5F6A85}" {
+         Name "Star3"
+         Slot LayoutSlot "{6A1B2C3D4E5F6A82}" {
+         }
+         "Is Visible" 0
+         Texture "{9DA6A249AD4D71C4}UI/Textures/Icons/icons_wrapperUI-48.imageset"
+         Image "favourite"
+         Size 30 30
+        }
+        ImageWidgetClass "{6A1B2C3D4E5F6A86}" {
+         Name "Star4"
+         Slot LayoutSlot "{6A1B2C3D4E5F6A82}" {
+         }
+         "Is Visible" 0
+         Texture "{9DA6A249AD4D71C4}UI/Textures/Icons/icons_wrapperUI-48.imageset"
+         Image "favourite"
+         Size 30 30
+        }
+       }
+      }
+      HorizontalLayoutWidgetClass "{6A1B2C3D4E5F6B01}" {
+       Name "AggressionRow"
+       Slot LayoutSlot "{6A1B2C3D4E5F6B02}" {
+        Padding 4 2 4 2
+       }
+       "Inherit Color" 1
+       {
+        TextWidgetClass "{6A1B2C3D4E5F6B03}" {
+         Name "AggressionLabel"
+         Slot LayoutSlot "{6A1B2C3D4E5F6B04}" {
+          VerticalAlign 1
+          Padding 0 0 6 0
+         }
+         Color 0.8 0.15 0.1 1
+         Text "Aggression"
+         "Font Size" 14
+         "Min Font Size" 14
+         FontProperties FontProperties "{694EF526FD12FE85}" {
+          Font "{D3E75BCBECEB273E}UI/Fonts/NotoSans/NotoSans-Enhanced-Regular-JP-KOR-SC-LAT.fnt"
+          Bold 1
+         }
+        }
+        ProgressBarWidgetClass "{6A1B2C3D4E5F6A87}" {
+         Name "AggressionBar"
+         Slot LayoutSlot "{6A1B2C3D4E5F6A88}" {
+          VerticalAlign 1
+          Padding 5 2 0 2
+         }
+         Color 0.8 0.15 0.1 1
+        }
+       }
+      }
+      HorizontalLayoutWidgetClass "{6A1B2C3D4E5F6B05}" {
+       Name "HRRow"
+       Slot LayoutSlot "{6A1B2C3D4E5F6B06}" {
+        Padding 4 2 4 2
+       }
+       "Inherit Color" 1
+       {
+        TextWidgetClass "{6A1B2C3D4E5F6B07}" {
+         Name "HRLabel"
+         Slot LayoutSlot "{6A1B2C3D4E5F6B08}" {
+          VerticalAlign 1
+          Padding 0 0 6 0
+         }
+         Color 0.1 0.6 0.2 1
+         Text "Human Resources"
+         "Font Size" 14
+         "Min Font Size" 14
+         FontProperties FontProperties "{694EF526F0A342E5}" {
+          Font "{D3E75BCBECEB273E}UI/Fonts/NotoSans/NotoSans-Enhanced-Regular-JP-KOR-SC-LAT.fnt"
+          Bold 1
+         }
+        }
+        ProgressBarWidgetClass "{6A1B2C3D4E5F6A89}" {
+         Name "HRBar"
+         Slot LayoutSlot "{6A1B2C3D4E5F6A8A}" {
+          VerticalAlign 1
+          Padding 5 2 0 2
+         }
+         Color 0.1 0.6 0.2 1
+         Current 0
+        }
+       }
+      }
+     }
+    }
+   }
+  }
+ }
+}
