@@ -9,6 +9,7 @@ class OVT_FactoryData : Managed
 
 	int faction;
 	vector location;
+	int garrisonCount;
 
 	[NonSerialized()]
 	EntityID entId;
@@ -28,7 +29,6 @@ class OVT_FactoryManagerComponent : OVT_Component
 
 	protected int m_iProductionTicks = 0;
 	protected int m_iHourPaidProduction = -1;
-	protected TimeAndWeatherManagerEntity m_Time;
 
 	const int UPDATE_FREQUENCY = 60000;
 
@@ -72,7 +72,7 @@ class OVT_FactoryManagerComponent : OVT_Component
 		data.faction = OVT_Global.GetConfig().GetOccupyingFactionIndex();
 		data.entId = ent.GetID();
 		m_aFactories.Insert(data);
-		return true;
+		return false;
 	}
 
 	protected bool FilterFactoryEntities(IEntity entity)
@@ -109,6 +109,8 @@ class OVT_FactoryManagerComponent : OVT_Component
 						AIWaypoint wp = OVT_Global.GetConfig().SpawnDefendWaypoint(pos);
 						aigroup.AddWaypoint(wp);
 					}
+					factory.garrisonCount = factory.garrison.Count();
+					Rpc(RpcDo_SetFactoryGarrisonCount, factory.id, factory.garrisonCount);
 				}else{
 					array<EntityID> remove = {};
 					foreach(EntityID id : factory.garrison)
@@ -128,9 +130,11 @@ class OVT_FactoryManagerComponent : OVT_Component
 					{
 						factory.garrison.RemoveItem(id);
 					}
-					if(factory.garrison.Count() == 0)
+					int newCount = factory.garrison.Count();
+					if(newCount != factory.garrisonCount)
 					{
-						CaptureFactory(factory);
+						factory.garrisonCount = newCount;
+						Rpc(RpcDo_SetFactoryGarrisonCount, factory.id, factory.garrisonCount);
 					}
 				}
 			}else{
@@ -142,6 +146,8 @@ class OVT_FactoryManagerComponent : OVT_Component
 						SCR_EntityHelper.DeleteEntityAndChildren(ent);
 					}
 					factory.garrison.Clear();
+					factory.garrisonCount = 0;
+					Rpc(RpcDo_SetFactoryGarrisonCount, factory.id, 0);
 				}
 			}
 		}
@@ -151,12 +157,37 @@ class OVT_FactoryManagerComponent : OVT_Component
 	{
 		factory.faction = OVT_Global.GetConfig().GetPlayerFactionIndex();
 		Rpc(RpcDo_SetFactoryFaction, factory.id, factory.faction);
-		OVT_Global.GetNotify().SendTextNotification("FactoryCaptured", -1, "");
 		OVT_Global.GetNotify().SendExternalNotifications("FactoryCaptured", "");
+		Rpc(RpcDo_BroadcastCaptureHint);
+		if (RplSession.Mode() != RplMode.Dedicated)
+			RpcDo_BroadcastCaptureHint();
 		OVT_OccupyingFactionManager of = OVT_Global.GetOccupyingFaction();
 		OVT_DifficultySettings diff = OVT_Global.GetDifficulty();
 		of.AddWarPoints(diff.warPointsPerBase);
 		of.m_fAggression = Math.Min(100, of.m_fAggression + diff.aggressionPerCapture);
+	}
+
+	[RplRpc(RplChannel.Reliable, RplRcver.Broadcast)]
+	protected void RpcDo_BroadcastCaptureHint()
+	{
+		int perTick = GetTotalSuppliesPerTick();
+		string msg = "Factory secured! The resistance now controls this production facility.";
+		if (perTick > 0)
+			msg = msg + " Total supply production: +" + perTick + " per cycle.";
+		SCR_HintManagerComponent.ShowCustomHint(msg, "Factory Captured!", 8);
+	}
+
+	int GetTotalSuppliesPerTick()
+	{
+		int playerFaction = OVT_Global.GetConfig().GetPlayerFactionIndex();
+		OVT_DifficultySettings diff = OVT_Global.GetDifficulty();
+		int perFactory = Math.Round(diff.factorySuppliesPerTick);
+		int total = 0;
+		foreach (OVT_FactoryData factory : m_aFactories)
+		{
+			if (factory.faction == playerFaction) total += perFactory;
+		}
+		return total;
 	}
 
 	void CheckUpdate()
@@ -204,8 +235,23 @@ class OVT_FactoryManagerComponent : OVT_Component
 			OVT_DifficultySettings diff = OVT_Global.GetDifficulty();
 			int produced = Math.Round(diff.factorySuppliesPerTick * ctrl.m_fSupplyMultiplier);
 			OVT_Global.GetEconomy().AddResistanceSupplies(produced);
-			Print("[Overthrow.FactoryManager] Factory produced " + produced + " supplies. Total: " + OVT_Global.GetEconomy().GetResistanceSupplies());
 		}
+	}
+
+	void RequestCaptureFactory(vector pos)
+	{
+		Rpc(RpcDo_RequestCaptureFactory, pos);
+	}
+
+	[RplRpc(RplChannel.Reliable, RplRcver.Server)]
+	protected void RpcDo_RequestCaptureFactory(vector pos)
+	{
+		OVT_FactoryData factory = GetNearestFactory(pos);
+		int garrisonCount = 0;
+		if (factory) garrisonCount = factory.garrison.Count();
+		if (!factory || !factory.IsOccupyingFaction()) return;
+		if (factory.garrison.Count() > 0) return;
+		CaptureFactory(factory);
 	}
 
 	OVT_FactoryData GetNearestFactory(vector pos)
@@ -232,6 +278,7 @@ class OVT_FactoryManagerComponent : OVT_Component
 		{
 			writer.WriteVector(factory.location);
 			writer.WriteInt(factory.faction);
+			writer.WriteInt(factory.garrisonCount);
 		}
 		return true;
 	}
@@ -250,6 +297,9 @@ class OVT_FactoryManagerComponent : OVT_Component
 			int fac;
 			if(!reader.ReadInt(fac)) return false;
 			factory.faction = fac;
+			int gc;
+			if(!reader.ReadInt(gc)) return false;
+			factory.garrisonCount = gc;
 			m_aFactories.Insert(factory);
 		}
 		return true;
@@ -260,5 +310,12 @@ class OVT_FactoryManagerComponent : OVT_Component
 	{
 		if(factoryId < m_aFactories.Count())
 			m_aFactories[factoryId].faction = faction;
+	}
+
+	[RplRpc(RplChannel.Reliable, RplRcver.Broadcast)]
+	protected void RpcDo_SetFactoryGarrisonCount(int factoryId, int count)
+	{
+		if(factoryId < m_aFactories.Count())
+			m_aFactories[factoryId].garrisonCount = count;
 	}
 }
