@@ -168,6 +168,8 @@ class OVT_DifficultySettings : ScriptAndConfig
 	int resistanceHRMax;
 	[Attribute(defvalue: "0", desc: "Starting resistance HR", category: "Resistance HR")]
 	int resistanceHRStart;
+	[Attribute(defvalue: "25", desc: "Minimum town support % required before town contributes HR per tick", category: "Resistance HR")]
+	int resistanceHRMinSupportThreshold;
 	[Attribute(defvalue: "1", desc: "Resistance HR regenerated per 1 town support point per 6h tick", category: "Resistance HR")]
 	float resistanceHRRegenPerSupport;
 	[Attribute(defvalue: "10", desc: "HR cost to recruit one AI soldier", category: "Resistance HR")]

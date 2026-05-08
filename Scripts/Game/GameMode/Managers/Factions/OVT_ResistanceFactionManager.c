@@ -179,13 +179,14 @@ class OVT_ResistanceFactionManager: OVT_Component
 
 	protected void RegenResistanceHR()
 	{
+		OVT_DifficultySettings diff = OVT_Global.GetDifficulty();
 		int totalSupport = 0;
 		foreach(OVT_TownData town : OVT_Global.GetTowns().GetTowns())
 		{
-			if(town.faction == OVT_Global.GetConfig().GetPlayerFactionIndex())
-				totalSupport += town.support;
+			if(town.faction != OVT_Global.GetConfig().GetPlayerFactionIndex()) continue;
+			if(town.SupportPercentage() < diff.resistanceHRMinSupportThreshold) continue;
+			totalSupport += town.support;
 		}
-		OVT_DifficultySettings diff = OVT_Global.GetDifficulty();
 		int regen = Math.Round(totalSupport * diff.resistanceHRRegenPerSupport);
 		m_iResistanceHR = Math.Min(diff.resistanceHRMax, m_iResistanceHR + regen);
 		Rpc(RpcDo_SetResistanceHR, m_iResistanceHR);
