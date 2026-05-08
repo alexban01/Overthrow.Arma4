@@ -187,6 +187,14 @@ class OVT_FactoryManagerComponent : OVT_Component
 		{
 			if (factory.faction == playerFaction) total += perFactory;
 		}
+		OVT_TownManagerComponent towns = OVT_Global.GetTowns();
+		if (towns)
+		{
+			foreach (OVT_TownData town : towns.m_Towns)
+			{
+				if (town.SupportPercentage() >= 100) total += diff.townSuppliesPerTick;
+			}
+		}
 		return total;
 	}
 
@@ -235,6 +243,23 @@ class OVT_FactoryManagerComponent : OVT_Component
 			OVT_DifficultySettings diff = OVT_Global.GetDifficulty();
 			int produced = Math.Round(diff.factorySuppliesPerTick * ctrl.m_fSupplyMultiplier);
 			OVT_Global.GetEconomy().AddResistanceSupplies(produced);
+		}
+
+		ProduceTownSupplies();
+	}
+
+	protected void ProduceTownSupplies()
+	{
+		OVT_TownManagerComponent towns = OVT_Global.GetTowns();
+		if(!towns) return;
+		OVT_DifficultySettings diff = OVT_Global.GetDifficulty();
+		int perTown = diff.townSuppliesPerTick;
+		if(perTown <= 0) return;
+
+		foreach(OVT_TownData town : towns.m_Towns)
+		{
+			if(town.SupportPercentage() < 100) continue;
+			OVT_Global.GetEconomy().AddResistanceSupplies(perTown);
 		}
 	}
 

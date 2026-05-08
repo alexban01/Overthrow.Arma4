@@ -160,6 +160,8 @@ class OVT_DifficultySettings : ScriptAndConfig
 	int factoryProductionIntervalTicks;
 	[Attribute(defvalue: "50", desc: "Resistance supplies produced per factory per production tick", category: "Factories")]
 	int factorySuppliesPerTick;
+	[Attribute(defvalue: "10", desc: "Resistance supplies produced per fully-supported town per production tick", category: "Factories")]
+	int townSuppliesPerTick;
 
 	// Resistance HR
 	[Attribute(defvalue: "500", desc: "Maximum resistance HR (manpower pool)", category: "Resistance HR")]
