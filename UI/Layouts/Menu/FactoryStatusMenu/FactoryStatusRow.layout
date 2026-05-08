@@ -1,0 +1,93 @@
+HorizontalLayoutWidgetClass "{6B1F3A2D5C4E7880}" {
+ Name "FactoryRow"
+ Slot LayoutSlot "{6B1F3A2D5C4E7881}" {
+  SizeMode Fill
+ }
+ "Fill Origin" Center
+ {
+  SizeLayoutWidgetClass "{6B1F3A2D5C4E7894}" {
+   Name "NameCell"
+   Slot LayoutSlot "{6B1F3A2D5C4E7895}" {
+    SizeMode Fill
+    FillWeight 2
+   }
+   AllowHeightOverride 1
+   HeightOverride 36
+   {
+    TextWidgetClass "{6B1F3A2D5C4E7896}" {
+     Name "FactoryNameText"
+     Slot AlignableSlot "{6B1F3A2D5C4E7897}" {
+      HorizontalAlign 0
+      VerticalAlign 1
+      Padding 10 0 0 0
+     }
+     Text "Factory 1"
+     Color 0.9 0.9 0.9 1
+     "Font Size" 14
+     "Min Font Size" 12
+    }
+   }
+  }
+  SizeLayoutWidgetClass "{6B1F3A2D5C4E7898}" {
+   Name "FactionCell"
+   Slot LayoutSlot "{6B1F3A2D5C4E7899}" {
+    SizeMode Fill
+    FillWeight 2
+   }
+   {
+    TextWidgetClass "{6B1F3A2D5C4E789A}" {
+     Name "FactionText"
+     Slot AlignableSlot "{6B1F3A2D5C4E789B}" {
+      HorizontalAlign 0
+      VerticalAlign 1
+     }
+     Text "Occupying"
+     Color 0.8 0 0 1
+     "Font Size" 14
+     "Min Font Size" 12
+    }
+   }
+  }
+  SizeLayoutWidgetClass "{6B1F3A2D5C4E789C}" {
+   Name "GarrisonCell"
+   Slot LayoutSlot "{6B1F3A2D5C4E789D}" {
+    SizeMode Fill
+    FillWeight 1
+   }
+   {
+    TextWidgetClass "{6B1F3A2D5C4E789E}" {
+     Name "GarrisonText"
+     Slot AlignableSlot "{6B1F3A2D5C4E789F}" {
+      HorizontalAlign 1
+      VerticalAlign 1
+     }
+     Text "0"
+     Color 0.9 0.9 0.9 1
+     "Font Size" 14
+     "Min Font Size" 12
+    }
+   }
+  }
+  SizeLayoutWidgetClass "{6B1F3A2D5C4E78A0}" {
+   Name "SuppliesCell"
+   Slot LayoutSlot "{6B1F3A2D5C4E78A1}" {
+    SizeMode Fill
+    FillWeight 1
+   }
+   {
+    TextWidgetClass "{6B1F3A2D5C4E78A2}" {
+     Name "SuppliesText"
+     Slot AlignableSlot "{6B1F3A2D5C4E78A3}" {
+      HorizontalAlign 1
+      VerticalAlign 1
+      Padding 0 0 10 0
+     }
+     Text "0"
+     Color 0.9 0.7 0.1 1
+     "Font Size" 14
+     "Min Font Size" 12
+    }
+   }
+  }
+ }
+}

@@ -1,0 +1,267 @@
+FrameWidgetClass "{6C2A4B3E7D5F8900}" {
+ Name "rootFrame"
+ {
+  HorizontalLayoutWidgetClass "{6C2A4B3E7D5F8901}" {
+   Name "Window"
+   Slot FrameWidgetSlot "{6C2A4B3E7D5F8902}" {
+    Anchor 0 0 1 1
+    PositionX 0
+    OffsetLeft 0
+    PositionY 0
+    OffsetTop 0
+    SizeX -1820
+    OffsetRight 0
+    SizeY -1050
+    OffsetBottom 0
+   }
+   {
+    OverlayWidgetClass "{6C2A4B3E7D5F8903}" {
+     Name "Content"
+     Slot LayoutSlot "{6C2A4B3E7D5F8904}" {
+      SizeMode Fill
+     }
+     {
+      ImageWidgetClass "{6C2A4B3E7D5F8905}" {
+       Name "Background"
+       Slot OverlayWidgetSlot "{6C2A4B3E7D5F8906}" {
+        HorizontalAlign 3
+        VerticalAlign 3
+       }
+       Opacity 0.5
+       Color 0 0 0 1
+      }
+      BlurWidgetClass "{6C2A4B3E7D5F8907}" {
+       Name "Blur"
+       Slot OverlayWidgetSlot "{6C2A4B3E7D5F8908}" {
+        HorizontalAlign 3
+        VerticalAlign 3
+       }
+       Color 0.305 0.305 0.305 1
+       Intensity 0.7
+      }
+      HorizontalLayoutWidgetClass "{6C2A4B3E7D5F8909}" {
+       Name "SpaceLayout"
+       Slot OverlayWidgetSlot "{6C2A4B3E7D5F890A}" {
+        Padding 0 72 0 72
+       }
+       {
+        FrameWidgetClass "{6C2A4B3E7D5F890B}" {
+         Name "SpaceLeft"
+         Slot LayoutSlot "{6C2A4B3E7D5F890C}" {
+          SizeMode Fill
+          FillWeight 0.025
+         }
+        }
+        SizeLayoutWidgetClass "{6C2A4B3E7D5F890D}" {
+         Name "Alignment"
+         Slot LayoutSlot "{6C2A4B3E7D5F890E}" {
+          SizeMode Fill
+         }
+         AllowWidthOverride 1
+         WidthOverride 1344
+         AllowHeightOverride 1
+         HeightOverride 936
+         {
+          VerticalLayoutWidgetClass "{6C2A4B3E7D5F890F}" {
+           Name "ContentLayout"
+           Slot AlignableSlot "{6C2A4B3E7D5F8910}" {
+            HorizontalAlign 3
+            VerticalAlign 3
+           }
+           "Fill Origin" Center
+           {
+            HorizontalLayoutWidgetClass "{6C2A4B3E7D5F8911}" {
+             Name "TitleRow"
+             Slot LayoutSlot "{6C2A4B3E7D5F8912}" {
+              Padding 0 0 0 12
+             }
+             {
+              TextWidgetClass "{6C2A4B3E7D5F8913}" : "{9D643D214767D616}UI/layouts/WidgetLibrary/TextWidgets/Text_Heading2.layout" {
+               Name "Title"
+               Slot LayoutSlot "{6C2A4B3E7D5F8914}" {
+                Padding 0 0 0 12
+                SizeMode Fill
+               }
+               Text "Factory Status"
+              }
+             }
+            }
+            TextWidgetClass "{6C2A4B3E7D5F8915}" {
+             Name "SummaryText"
+             Slot LayoutSlot "{6C2A4B3E7D5F8916}" {
+              Padding 10 0 10 12
+             }
+             Text "0/0 factories controlled  |  +0 supplies/tick"
+             Color 0.9 0.7 0.1 1
+             "Font Size" 16
+             "Min Font Size" 12
+            }
+            HorizontalLayoutWidgetClass "{6C2A4B3E7D5F8917}" {
+             Name "ColumnHeaders"
+             Slot LayoutSlot "{6C2A4B3E7D5F8918}" {
+              Padding 0 0 0 4
+             }
+             {
+              SizeLayoutWidgetClass "{6C2A4B3E7D5F8919}" {
+               Name "HeaderNameCell"
+               Slot LayoutSlot "{6C2A4B3E7D5F891A}" {
+                SizeMode Fill
+                FillWeight 2
+               }
+               {
+                TextWidgetClass "{6C2A4B3E7D5F891B}" {
+                 Name "HeaderName"
+                 Slot AlignableSlot "{6C2A4B3E7D5F891C}" {
+                  HorizontalAlign 0
+                  VerticalAlign 1
+                  Padding 10 0 0 0
+                 }
+                 Text "Factory"
+                 Color 0.6 0.6 0.6 1
+                 "Font Size" 13
+                 "Min Font Size" 11
+                }
+               }
+              }
+              SizeLayoutWidgetClass "{6C2A4B3E7D5F891D}" {
+               Name "HeaderFactionCell"
+               Slot LayoutSlot "{6C2A4B3E7D5F891E}" {
+                SizeMode Fill
+                FillWeight 2
+               }
+               {
+                TextWidgetClass "{6C2A4B3E7D5F891F}" {
+                 Name "HeaderFaction"
+                 Slot AlignableSlot "{6C2A4B3E7D5F8920}" {
+                  HorizontalAlign 0
+                  VerticalAlign 1
+                 }
+                 Text "Faction"
+                 Color 0.6 0.6 0.6 1
+                 "Font Size" 13
+                 "Min Font Size" 11
+                }
+               }
+              }
+              SizeLayoutWidgetClass "{6C2A4B3E7D5F8921}" {
+               Name "HeaderGarrisonCell"
+               Slot LayoutSlot "{6C2A4B3E7D5F8922}" {
+                SizeMode Fill
+                FillWeight 1
+               }
+               {
+                TextWidgetClass "{6C2A4B3E7D5F8923}" {
+                 Name "HeaderGarrison"
+                 Slot AlignableSlot "{6C2A4B3E7D5F8924}" {
+                  HorizontalAlign 1
+                  VerticalAlign 1
+                 }
+                 Text "Garrison"
+                 Color 0.6 0.6 0.6 1
+                 "Font Size" 13
+                 "Min Font Size" 11
+                }
+               }
+              }
+              SizeLayoutWidgetClass "{6C2A4B3E7D5F8925}" {
+               Name "HeaderSuppliesCell"
+               Slot LayoutSlot "{6C2A4B3E7D5F8926}" {
+                SizeMode Fill
+                FillWeight 1
+               }
+               {
+                TextWidgetClass "{6C2A4B3E7D5F8927}" {
+                 Name "HeaderSupplies"
+                 Slot AlignableSlot "{6C2A4B3E7D5F8928}" {
+                  HorizontalAlign 1
+                  VerticalAlign 1
+                  Padding 0 0 10 0
+                 }
+                 Text "Supplies/tick"
+                 Color 0.6 0.6 0.6 1
+                 "Font Size" 13
+                 "Min Font Size" 11
+                }
+               }
+              }
+             }
+            }
+            ImageWidgetClass "{6C2A4B3E7D5F8929}" {
+             Name "UpperStripe"
+             Slot LayoutSlot "{6C2A4B3E7D5F892A}" {
+              Padding 0 0 0 4
+             }
+             Color 0.761 0.392 0.08 1
+             Image ""
+             Size 128 2
+            }
+            ScrollLayoutWidgetClass "{6C2A4B3E7D5F892B}" {
+             Name "ContentSegment"
+             Slot LayoutSlot "{6C2A4B3E7D5F892C}" {
+              SizeMode Fill
+             }
+             {
+              VerticalLayoutWidgetClass "{6C2A4B3E7D5F892D}" {
+               Name "FactoryListContainer"
+               Slot OverlayWidgetSlot "{6C2A4B3E7D5F892E}" {
+                HorizontalAlign 3
+                VerticalAlign 0
+               }
+              }
+             }
+            }
+            ImageWidgetClass "{6C2A4B3E7D5F892F}" {
+             Name "LowerStripe"
+             Slot LayoutSlot "{6C2A4B3E7D5F8930}" {
+              Padding 0 4 0 12
+             }
+             Opacity 0.1
+             Size 2 2
+            }
+            OverlayWidgetClass "{6C2A4B3E7D5F8931}" {
+             Name "Footer"
+             Slot LayoutSlot "{6C2A4B3E7D5F8932}" {
+             }
+             {
+              HorizontalLayoutWidgetClass "{6C2A4B3E7D5F8933}" {
+               Name "Buttons"
+               Slot OverlayWidgetSlot "{6C2A4B3E7D5F8934}" {
+                HorizontalAlign 3
+               }
+               {
+                ButtonWidgetClass "{6C2A4B3E7D5F8935}" : "{08CF3B69CB1ACBC4}UI/layouts/WidgetLibrary/Buttons/WLib_NavigationButton.layout" {
+                 Name "CloseButton"
+                 Slot LayoutSlot "{6C2A4B3E7D5F8936}" {
+                 }
+                 components {
+                  SCR_InputButtonComponent "{6C2A4B3E7D5F8937}" {
+                   Action "MenuBack"
+                   ShowLabelInGamepad 1
+                   ShowLabelInKeyboard 1
+                   Text "Close"
+                  }
+                 }
+                }
+               }
+              }
+             }
+            }
+           }
+          }
+         }
+        }
+        FrameWidgetClass "{6C2A4B3E7D5F8938}" {
+         Name "SpaceRight"
+         Slot LayoutSlot "{6C2A4B3E7D5F8939}" {
+          SizeMode Fill
+          FillWeight 0.025
+         }
+        }
+       }
+      }
+     }
+    }
+   }
+  }
+ }
+}

@@ -26,6 +26,7 @@ class OVT_FactoryData : Managed
 class OVT_FactoryManagerComponent : OVT_Component
 {
 	ref array<ref OVT_FactoryData> m_aFactories = {};
+	ref array<ref OVT_FactoryData> m_aPendingLoad = {};
 
 	protected int m_iProductionTicks = 0;
 	protected int m_iHourPaidProduction = -1;
@@ -62,6 +63,14 @@ class OVT_FactoryManagerComponent : OVT_Component
 	protected void PostGameStart()
 	{
 		GetGame().GetWorld().QueryEntitiesBySphere("0 0 0", 99999999, CheckFactoryAdd, FilterFactoryEntities, EQueryEntitiesFlags.STATIC);
+
+		foreach (OVT_FactoryData saved : m_aPendingLoad)
+		{
+			OVT_FactoryData existing = GetNearestFactory(saved.location);
+			if (existing)
+				existing.faction = saved.faction;
+		}
+		m_aPendingLoad.Clear();
 	}
 
 	protected bool CheckFactoryAdd(IEntity ent)

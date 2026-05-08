@@ -67,6 +67,14 @@ SCR_ChimeraCharacter : "{7A9EE19AB67B298B}Prefabs/Characters/Factions/INDFOR/FIA
      m_bOpenActionCloses 0
      m_JobLayout "{55AB78EFC69205D2}UI/Layouts/Menu/JobsMenu/JobCard.layout"
     }
+    OVT_FactoryStatusContext "{6C2A4B3E7D5F8941}" {
+     m_Layout "{6C2A4B3E7D5F8942}UI/Layouts/Menu/FactoryStatusMenu.layout"
+     m_sContextName "OverthrowFactoryStatusContext"
+     m_sCloseAction "MenuBack"
+     m_bOpenActionCloses 0
+     m_bHideHUDOnShow 1
+     m_RowLayout "{6C2A4B3E7D5F8943}UI/Layouts/Menu/FactoryStatusMenu/FactoryStatusRow.layout"
+    }
     OVT_BuildContext "{59C4C0E9D2BF409E}" {
      m_Layout "{871C07E88AE43089}UI/Layouts/Menu/BuildMenu.layout"
      m_sContextName "OverthrowBuildMenuContext"
@@ -163,6 +171,9 @@ SCR_ChimeraCharacter : "{7A9EE19AB67B298B}Prefabs/Characters/Factions/INDFOR/FIA
     }
     OVT_ProgressInfo "{65C4B2DA956034BF}" {
      m_LayoutPath "{2AB6AD04B7B6262A}UI/Layouts/HUD/ProgressInfo.layout"
+    }
+    OVT_WarInfo "{6B2C3D4E5F6A7B90}" {
+     m_LayoutPath "{6B2C3D4E5F6A7B8C}UI/Layouts/HUD/WarInfo.layout"
     }
    }
   }

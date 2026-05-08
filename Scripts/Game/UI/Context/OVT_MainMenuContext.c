@@ -131,6 +131,13 @@ class OVT_MainMenuContext : OVT_UIContext
 		{
 			comp.m_OnClicked.Insert(Jobs);
 		}
+
+		// Factories
+		comp = SCR_ButtonTextComponent.GetButtonText("Factories", m_wRoot);
+		if (comp)
+		{
+			comp.m_OnClicked.Insert(Factories);
+		}
 		
 		// Build
 		comp = SCR_ButtonTextComponent.GetButtonText("Build", m_wRoot);
@@ -228,7 +235,13 @@ class OVT_MainMenuContext : OVT_UIContext
 	private void Jobs()
 	{
 		CloseLayout();
-		m_UIManager.ShowContext(OVT_JobsContext);		
+		m_UIManager.ShowContext(OVT_JobsContext);
+	}
+
+	private void Factories()
+	{
+		CloseLayout();
+		m_UIManager.ShowContext(OVT_FactoryStatusContext);
 	}
 	
 	private void Build()

@@ -1,0 +1,15 @@
+MetaFileClass {
+ Name "{6C2A4B3E7D5F8943}UI/Layouts/Menu/FactoryStatusMenu/FactoryStatusRow.layout"
+ Configurations {
+  LayoutResourceClass PC {
+  }
+  LayoutResourceClass XBOX_ONE : PC {
+  }
+  LayoutResourceClass XBOX_SERIES : PC {
+  }
+  LayoutResourceClass PS4 : PC {
+  }
+  LayoutResourceClass HEADLESS : PC {
+  }
+ }
+}

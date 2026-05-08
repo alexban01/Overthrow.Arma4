@@ -25,9 +25,7 @@ class OVT_FactorySaveData : EPF_ComponentSaveData
 		if(!m_Factories) return EPF_EApplyResult.OK;
 		foreach(OVT_FactoryData saved : m_Factories)
 		{
-			OVT_FactoryData existing = mgr.GetNearestFactory(saved.location);
-			if(!existing) continue;
-			existing.faction = saved.faction;
+			mgr.m_aPendingLoad.Insert(saved);
 		}
 		return EPF_EApplyResult.OK;
 	}
