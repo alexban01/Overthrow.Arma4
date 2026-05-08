@@ -25,6 +25,9 @@ SCR_ChimeraCharacter : "{7A9EE19AB67B298B}Prefabs/Characters/Factions/INDFOR/FIA
     OVT_EconomyInfo "{59DA663750D0290B}" {
      m_LayoutPath "{3C972A84DC44F671}UI/Layouts/HUD/EconomyInfo.layout"
     }
+    OVT_WarInfo "{6B2C3D4E5F6A7B91}" {
+     m_LayoutPath "{6B2C3D4E5F6A7B8C}UI/Layouts/HUD/WarInfo.layout"
+    }
    }
   }
   SCR_EditableCharacterComponent "{520EA1D2F659C85C}" {

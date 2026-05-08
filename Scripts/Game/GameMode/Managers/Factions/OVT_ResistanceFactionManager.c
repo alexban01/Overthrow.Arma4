@@ -96,7 +96,6 @@ class OVT_ResistanceFactionManager: OVT_Component
 	int m_iResistanceHR;
 
 	protected int m_iHourPaidHRRegen = -1;
-	protected TimeAndWeatherManagerEntity m_Time;
 
 	ref ScriptInvoker m_OnPlace = new ScriptInvoker();
 	ref ScriptInvoker m_OnBuild = new ScriptInvoker();

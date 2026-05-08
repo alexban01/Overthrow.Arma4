@@ -155,6 +155,44 @@ OverlayWidgetClass {
         }
        }
       }
+      HorizontalLayoutWidgetClass "{6A1B2C3D4E5F6B09}" {
+       Name "SuppliesRow"
+       Slot LayoutSlot "{6A1B2C3D4E5F6B0A}" {
+        Padding 4 2 4 2
+       }
+       "Inherit Color" 1
+       {
+        TextWidgetClass "{6A1B2C3D4E5F6B0B}" {
+         Name "SuppliesLabel"
+         Slot LayoutSlot "{6A1B2C3D4E5F6B0C}" {
+          VerticalAlign 1
+          Padding 0 0 6 0
+         }
+         Color 0.9 0.7 0.1 1
+         Text "Supplies"
+         "Font Size" 14
+         "Min Font Size" 14
+         FontProperties FontProperties "{694EF526F0A342E6}" {
+          Font "{D3E75BCBECEB273E}UI/Fonts/NotoSans/NotoSans-Enhanced-Regular-JP-KOR-SC-LAT.fnt"
+          Bold 1
+         }
+        }
+        TextWidgetClass "{6A1B2C3D4E5F6B0D}" {
+         Name "SuppliesText"
+         Slot LayoutSlot "{6A1B2C3D4E5F6B0E}" {
+          VerticalAlign 1
+          Padding 5 2 0 2
+         }
+         Color 0.9 0.7 0.1 1
+         Text "0"
+         "Font Size" 14
+         "Min Font Size" 14
+         FontProperties FontProperties "{694EF526F0A342E7}" {
+          Font "{D3E75BCBECEB273E}UI/Fonts/NotoSans/NotoSans-Enhanced-Regular-JP-KOR-SC-LAT.fnt"
+         }
+        }
+       }
+      }
      }
     }
    }

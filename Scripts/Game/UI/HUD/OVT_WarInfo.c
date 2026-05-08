@@ -1,6 +1,7 @@
 class OVT_WarInfo : SCR_InfoDisplay
 {
 	protected OVT_OccupyingFactionManager m_OccupyingFaction;
+	protected OVT_FactoryManagerComponent m_Factory;
 
 	protected float m_fUpdateCounter = 0;
 
@@ -17,9 +18,13 @@ class OVT_WarInfo : SCR_InfoDisplay
 
 		if (!m_OccupyingFaction) return;
 
+		if (!m_Factory)
+			m_Factory = OVT_FactoryManagerComponent.GetInstance();
+
 		UpdateWarLevel();
 		UpdateAggression();
 		UpdateHR();
+		UpdateSupplies();
 	}
 
 	protected void UpdateWarLevel()
@@ -50,5 +55,23 @@ class OVT_WarInfo : SCR_InfoDisplay
 			pct = (float)m_OccupyingFaction.GetHR() / (float)hrMax * 100.0;
 		bar.SetMax(100);
 		bar.SetCurrent(pct);
+	}
+
+	protected void UpdateSupplies()
+	{
+		TextWidget w = TextWidget.Cast(m_wRoot.FindAnyWidget("SuppliesText"));
+		if (!w) return;
+
+		int supplies = OVT_Global.GetEconomy().GetResistanceSupplies();
+		string text = supplies.ToString();
+
+		if (m_Factory)
+		{
+			int perTick = m_Factory.GetTotalSuppliesPerTick();
+			if (perTick > 0)
+				text = text + " (+" + perTick + ")";
+		}
+
+		w.SetText(text);
 	}
 }

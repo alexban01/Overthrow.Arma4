@@ -33,6 +33,11 @@ GenericEntity : "{160E4E4110803F26}Prefabs/Structures/Military/Flags/FlagPole_02
       "default"
      }
     }
+    OVT_GarrisonFactoryAction "{6951521692A3BD06}" {
+     ParentContextList {
+      "default"
+     }
+    }
    }
   }
   RplComponent "{6950BEE29B8EB16D}" {

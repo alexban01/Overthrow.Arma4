@@ -706,6 +706,44 @@ class OVT_PlayerCommsComponent: OVT_Component
 		rf.AddGarrisonFOB(fob, prefabIndex);
 	}
 	
+	void AddGarrisonFactory(OVT_FactoryData factory, ResourceName res)
+	{
+		OVT_Faction faction = OVT_Global.GetConfig().GetPlayerFaction();
+		int index = faction.m_aGroupPrefabSlots.Find(res);
+		if (index == -1) return;
+		Rpc(RpcAsk_AddGarrisonFactory, factory.location, index);
+	}
+	[RplRpc(RplChannel.Reliable, RplRcver.Server)]
+	protected void RpcAsk_AddGarrisonFactory(vector factoryPos, int prefabIndex)
+	{
+		OVT_FactoryManagerComponent mgr = OVT_FactoryManagerComponent.GetInstance();
+		if (!mgr) return;
+		OVT_FactoryData factory = mgr.GetNearestFactory(factoryPos);
+		if (!factory || factory.IsOccupyingFaction()) return;
+
+		OVT_DifficultySettings diff = OVT_Global.GetDifficulty();
+		OVT_Faction faction = OVT_Global.GetConfig().GetPlayerFaction();
+		ResourceName res = faction.m_aGroupPrefabSlots[prefabIndex];
+
+		IEntity spawn = OVT_Global.SpawnEntityPrefab(res, "0 0 0", "0 0 0", false);
+		SCR_AIGroup tempGroup = SCR_AIGroup.Cast(spawn);
+		if (!tempGroup) { SCR_EntityHelper.DeleteEntityAndChildren(spawn); return; }
+		int numSoldiers = tempGroup.m_aUnitPrefabSlots.Count();
+		SCR_EntityHelper.DeleteEntityAndChildren(spawn);
+
+		int hrCost = diff.recruitHRCost * numSoldiers;
+		int supplyCost = diff.recruitSupplyCost * numSoldiers;
+
+		OVT_ResistanceFactionManager rf = OVT_Global.GetResistanceFaction();
+		if (rf.GetResistanceHR() < hrCost) return;
+		OVT_EconomyManagerComponent economy = OVT_Global.GetEconomy();
+		if (economy.GetResistanceSupplies() < supplyCost) return;
+
+		if (!rf.TakeResistanceHR(hrCost)) return;
+		if (!economy.TakeResistanceSupplies(supplyCost)) return;
+		mgr.AddGarrisonFactory(factory, prefabIndex);
+	}
+
 	//VEHICLES
 	void DeployFOB(IEntity vehicle)
 	{

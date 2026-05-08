@@ -272,6 +272,25 @@ class OVT_FactoryManagerComponent : OVT_Component
 		}
 	}
 
+	void AddGarrisonFactory(OVT_FactoryData factory, int prefabIndex)
+	{
+		OVT_Faction faction = OVT_Global.GetConfig().GetPlayerFaction();
+		ResourceName res = faction.m_aGroupPrefabSlots[prefabIndex];
+
+		vector pos = factory.location + "5 0 0";
+		float surfaceY = GetGame().GetWorld().GetSurfaceY(pos[0], pos[2]);
+		if (pos[1] < surfaceY) pos[1] = surfaceY;
+
+		IEntity group = OVT_Global.SpawnEntityPrefab(res, pos);
+		factory.garrison.Insert(group.GetID());
+		SCR_AIGroup aigroup = SCR_AIGroup.Cast(group);
+		AIWaypoint wp = OVT_Global.GetConfig().SpawnDefendWaypoint(factory.location);
+		aigroup.AddWaypoint(wp);
+
+		factory.garrisonCount = factory.garrison.Count();
+		Rpc(RpcDo_SetFactoryGarrisonCount, factory.id, factory.garrisonCount);
+	}
+
 	void RequestCaptureFactory(vector pos)
 	{
 		Rpc(RpcDo_RequestCaptureFactory, pos);

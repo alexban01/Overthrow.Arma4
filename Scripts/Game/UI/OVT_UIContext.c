@@ -138,6 +138,12 @@ class OVT_UIContext : ScriptAndConfig
 		m_wRoot = workspace.CreateWidgets(m_Layout);
 		Print("[Overthrow] m_wRoot created: " + m_wRoot);
 
+		if(!m_wRoot)
+		{
+			Print("[Overthrow] ShowLayout() failed: CreateWidgets returned null for layout: " + m_Layout);
+			return;
+		}
+
 		if(m_bHideHUDOnShow){
 			SCR_HUDManagerComponent hud = GetGame().GetHUDManager();
 			if (hud)

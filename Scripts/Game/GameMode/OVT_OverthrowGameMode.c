@@ -895,6 +895,13 @@ class OVT_OverthrowGameMode : SCR_BaseGameMode
 			m_Deployment.Init(this);
 		}
 
+		OVT_FactoryManagerComponent factoryManager = OVT_FactoryManagerComponent.Cast(FindComponent(OVT_FactoryManagerComponent));
+		if(factoryManager)
+		{
+			Print("[Overthrow] Initializing Factories");
+			factoryManager.Init(this);
+		}
+
 		if(!IsMaster()) {
 			return;
 		}

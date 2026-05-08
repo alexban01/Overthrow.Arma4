@@ -835,6 +835,7 @@ class OVT_TownManagerComponent: OVT_Component
 		if(m_TownNames[townId] == "")
 		{
 			SCR_MapDescriptorComponent desc = GetNearestTownMarker(m_Towns[townId].location);
+			if(!desc) return "";
 			m_TownNames[townId] = desc.Item().GetDisplayName();
 		}
 		return m_TownNames[townId];

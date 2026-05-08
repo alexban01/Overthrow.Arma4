@@ -69,7 +69,7 @@ SCR_ChimeraCharacter : "{7A9EE19AB67B298B}Prefabs/Characters/Factions/INDFOR/FIA
     }
     OVT_FactoryStatusContext "{6C2A4B3E7D5F8941}" {
      m_Layout "{6C2A4B3E7D5F8942}UI/Layouts/Menu/FactoryStatusMenu.layout"
-     m_sContextName "OverthrowFactoryStatusContext"
+     m_sContextName "OverthrowBaseMenuContext"
      m_sCloseAction "MenuBack"
      m_bOpenActionCloses 0
      m_bHideHUDOnShow 1
@@ -159,6 +159,13 @@ SCR_ChimeraCharacter : "{7A9EE19AB67B298B}Prefabs/Characters/Factions/INDFOR/FIA
      m_sCloseAction "MenuBack"
      m_bOpenActionCloses 0
     }
+    OVT_FactoryGarrisonContext "{69515216E5003F73}" {
+     m_Layout "{9062B009ECA8B751}UI/Layouts/Menu/FactoryGarrisonMenu.layout"
+     m_sContextName "OverthrowBaseMenuContext"
+     m_sCloseAction "MenuBack"
+     m_bOpenActionCloses 0
+     m_bHideHUDOnShow 1
+    }
    }
   }
   SCR_BaseHUDComponent "{520EA1D2DB118134}" {
@@ -188,10 +195,10 @@ SCR_ChimeraCharacter : "{7A9EE19AB67B298B}Prefabs/Characters/Factions/INDFOR/FIA
     m_Image "{0F62C575785D87CD}UI/Textures/EditorPreviews/Characters/INDFOR/FIA/Character_FIA_Unarmed.edds"
     m_sFaction "FIA"
     m_aAuthoredLabels + {
-     22
+     TRAIT_UNARMED
     }
     m_aAutoLabels {
-     122
+     SIZE_M
     }
    }
   }
@@ -233,7 +240,7 @@ SCR_ChimeraCharacter : "{7A9EE19AB67B298B}Prefabs/Characters/Factions/INDFOR/FIA
     ItemsInitConfigurationItem "{566C8D26AC156C09}" {
      TargetStorage "Prefabs/Characters/Uniforms/Pants/cargo_pants_grey.et"
      PrefabsToSpawn {
-      "{13772C903CB5E4F7}Prefabs/Items/Equipment/Maps/PaperMap_01_folded.et" "{3A421547BC29F679}Prefabs/Items/Equipment/Flashlights/Flashlight_MX991/Flashlight_MX991.et"
+      "{13772C903CB5E4F7}Prefabs/Items/Equipment/Maps/Map_Paper_01/PaperMap_01_folded.et" "{3A421547BC29F679}Prefabs/Items/Equipment/Flashlights/Flashlight_MX991/Flashlight_MX991.et"
      }
     }
     ItemsInitConfigurationItem "{5968C8BB5309538A}" {
