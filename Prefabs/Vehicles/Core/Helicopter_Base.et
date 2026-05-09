@@ -23,6 +23,10 @@ Vehicle : "{4085446E2B406849}Prefabs/Vehicles/Core/Vehicle_Base.et" {
        m_LayoutPath "{3C972A84DC44F671}UI/Layouts/HUD/EconomyInfo.layout"
        m_eLayer OVERLAY
       }
+      OVT_WarInfo "{6B2C3D4E5F6A7B94}" {
+       m_LayoutPath "{6B2C3D4E5F6A7B8C}UI/Layouts/HUD/WarInfo.layout"
+       m_eLayer OVERLAY
+      }
      }
     }
    }

@@ -40,6 +40,14 @@ OVT_OverthrowGameMode OVT_OverthrowGameMode1 : "{4DC10DCB8BE06D32}Prefabs/GameMo
      }
      OVT_ConfigSaveDataClass "{5D9E53AFE550A24E}" {
      }
+     OVT_DeploymentManagerComponentSaveDataClass "{65B2DE4DE0F7175D}" {
+     }
+     OVT_RecruitSaveDataClass "{65A26826DE2960DA}" {
+     }
+     OVT_LoadoutManagerSaveDataClass "{65AAD8FBE5BDC6EE}" {
+     }
+     OVT_FactorySaveDataClass "{694F5D8DFD25FAAA}" {
+     }
     }
    }
   }
@@ -71,24 +79,6 @@ OVT_OverthrowGameMode OVT_OverthrowGameMode1 : "{4DC10DCB8BE06D32}Prefabs/GameMo
    m_pQRFControllerPrefab "{A7D27DFA72B705D0}Prefabs/Controllers/OVT_QRFController.et"
   }
   OVT_OverthrowConfigComponent "{59724C8C935D8E5D}" {
-   m_aCameraPositions {
-    OVT_CameraPosition "{5D5826DD31952987}" {
-     position 10455.49 40.22 413.76
-     angles 5.1 -498.11 0
-    }
-    OVT_CameraPosition "{5D5826D532072C15}" {
-     position 4875.03 53.47 10470.618
-     angles -0.21 702.18 0
-    }
-    OVT_CameraPosition "{5D5826D5F3BEBDD1}" {
-     position 8100.65 380.56 2753.78
-     angles -5.31 962.88 0
-    }
-    OVT_CameraPosition "{5D5826D5A7568205}" {
-     position 9973.95 333.08 2269.49
-     angles -12.81 1270.68 0
-    }
-   }
    m_pTownControllerPrefab "{75CB2B42ADFB0EA7}Prefabs/Controllers/OVT_TownController.et"
    m_Difficulty OVT_DifficultySettings "{598AD54E1DA56EB1}" : "{C0CB40B3E8B87FD4}Configs/Difficulty/Difficulty_Normal.conf" {
    }
@@ -311,4 +301,59 @@ RadioManagerEntity RadioManager : "{B8E09FAB91C4ECCD}Prefabs/Radio/RadioManager.
  coords 3201.473 0 11071.047
 }
 ScriptedChatEntity : "{F69BC912AC8236F9}Prefabs/MP/ScriptedChatEntity.et" {
+}
+GenericEntity : "{26B31D75CA2CC1B8}Prefabs/Controllers/OVT_FactoryController.et" {
+ components {
+  OVT_FactoryControllerComponent "{6950BCC0367F412B}" {
+  }
+  SlotManagerComponent "{55DAE04E55ECE7FA}" {
+   Slots {
+    EntitySlotInfo Flag {
+     Prefab "{CB81BF6576E682D3}Prefabs/Props/Fabric/Flags/Flag_1_2_USSR_01.et"
+    }
+   }
+  }
+  ActionsManagerComponent "{6950BCC0367F4042}" {
+   ActionContexts {
+    UserActionContext "{6950BCC0367F4041}" {
+     ContextName "default"
+     Position PointInfo "{6950BCC0367F4066}" {
+      Offset 0 1.8 0
+     }
+     Radius 0.65
+    }
+   }
+   additionalActions {
+    OVT_SetHomeAction "{6950BCC0367F401A}" {
+     ParentContextList +{
+     }
+     UIInfo UIInfo "{6950BCC0367F401F}" {
+      Name "#OVT-SetHome"
+     }
+    }
+    OVT_ManageBaseAction "{6950BCC0367F401D}" {
+     ParentContextList +{
+     }
+     "Sort Priority" 1
+    }
+    OVT_CaptureBaseAction "{6950BCC0367F401C}" {
+     ParentContextList +{
+     }
+     UIInfo UIInfo "{6950BCC0367F4013}" {
+      Name "#OVT-CaptureBase"
+     }
+     Duration 15
+    }
+   }
+  }
+ }
+ coords 6978.726 92.204 4674.688
+}
+GenericEntity : "{75CB2B42ADFB0EA7}Prefabs/Controllers/OVT_TownController.et" {
+ components {
+  OVT_FactoryControllerComponent "{694F731BA7790468}" {
+   m_fSupplyMultiplier 2
+  }
+ }
+ coords 4528.051 155.193 6857.98
 }

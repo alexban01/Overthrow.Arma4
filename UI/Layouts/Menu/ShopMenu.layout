@@ -109,7 +109,7 @@ FrameWidgetClass {
               Padding 0 0 0 12
              }
              components {
-              SCR_EditBoxComponent "{5B00000000000002}" {
+              SCR_EditBoxComponent "{5472C6CBC0640458}" {
                m_sLabel "Search here..."
                m_bShowWriteIcon 0
               }

@@ -257,6 +257,28 @@ SCR_DestructibleBuildingEntity : "{92E8F78BCF17D93D}Prefabs/Structures/Commercia
  }
  coords 191.848 0.001 87.529
 }
+GenericEntity : "{941A8394710BAE44}Prefabs/Controllers/OVT_FactoryController.et" {
+ components {
+  OVT_FactoryControllerComponent "{6950BEE29B8EB2BE}" {
+   m_fCaptureRadius 5
+  }
+  SlotManagerComponent "{55DAE04E55ECE7FA}" {
+   Slots {
+    EntitySlotInfo Flag {
+     Prefab "{CB81BF6576E682D3}Prefabs/Props/Fabric/Flags/Flag_1_2_USSR_01.et"
+    }
+   }
+  }
+  ActionsManagerComponent "{6950BEE29B8EB150}" {
+   ActionContexts {
+    UserActionContext "{6950BEE29B8EB157}" {
+     Radius 2.08
+    }
+   }
+  }
+ }
+ coords 247.246 1 168.806
+}
 SCR_MPDestructionManager : "{9BB369F2803C6F71}Prefabs/MP/MPDestructionManager.et" {
  coords 100.821 1 49.288
 }

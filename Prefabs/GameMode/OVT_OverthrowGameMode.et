@@ -28,6 +28,8 @@ OVT_OverthrowGameMode {
      }
      OVT_LoadoutManagerSaveDataClass "{65AAD8FBE5BDC6EE}" {
      }
+     OVT_FactorySaveDataClass "{694F5D8DFD25FAAA}" {
+     }
     }
    }
   }
@@ -44,6 +46,8 @@ OVT_OverthrowGameMode {
    }
    m_VehiclePriceConfig OVT_VehiclePricesConfig "{5D96A5A380C4B791}" : "{8787FC0A63F99EF8}Configs/Pricing/vehiclePrices.conf" {
    }
+  }
+  OVT_FactoryManagerComponent "{694F5D8DFD25FB2B}" {
   }
   OVT_InventoryManagerComponent "{65B09EE7D3217F5A}" {
   }
