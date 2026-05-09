@@ -178,6 +178,11 @@ class OVT_MainMenuContext : OVT_UIContext
 		{
 			comp.m_OnClicked.Insert(Save);
 		}
+
+		// Dev Menu (only when devMode is enabled in difficulty settings)
+		comp = SCR_ButtonTextComponent.GetButtonText("DevMenu", m_wRoot);
+		if (comp)
+			comp.m_OnClicked.Insert(DevMenu);
 		
 		//Logs
 		Widget container = m_wRoot.FindAnyWidget("LogContainer");
@@ -272,6 +277,12 @@ class OVT_MainMenuContext : OVT_UIContext
 		m_UIManager.ShowContext(OVT_CharacterSheetContext);		
 	}
 	
+	private void DevMenu()
+	{
+		CloseLayout();
+		m_UIManager.ShowContext(OVT_DevMenuContext);
+	}
+
 	private void Save()
 	{
 		CloseLayout();

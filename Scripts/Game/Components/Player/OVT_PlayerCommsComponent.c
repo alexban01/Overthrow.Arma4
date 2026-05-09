@@ -1345,6 +1345,114 @@ class OVT_PlayerCommsComponent: OVT_Component
 		Print("[OVT_PlayerCommsComponent] Server: Dismissed recruit: " + recruitId, LogLevel.NORMAL);
 	}
 	
+	//DEV MENU
+
+	void DevAddResistanceHR(int amount)
+	{
+		Rpc(RpcAsk_DevAddResistanceHR, amount);
+	}
+
+	[RplRpc(RplChannel.Reliable, RplRcver.Server)]
+	protected void RpcAsk_DevAddResistanceHR(int amount)
+	{
+		OVT_ResistanceFactionManager rf = OVT_Global.GetResistanceFaction();
+		int newVal = Math.Clamp(rf.GetResistanceHR() + amount, 0, OVT_Global.GetDifficulty().resistanceHRMax);
+		rf.DevSetResistanceHR(newVal);
+	}
+
+	void DevAddResistanceSupplies(int amount)
+	{
+		Rpc(RpcAsk_DevAddResistanceSupplies, amount);
+	}
+
+	[RplRpc(RplChannel.Reliable, RplRcver.Server)]
+	protected void RpcAsk_DevAddResistanceSupplies(int amount)
+	{
+		OVT_EconomyManagerComponent economy = OVT_Global.GetEconomy();
+		if (amount >= 0)
+			economy.AddResistanceSupplies(amount);
+		else
+			economy.TakeResistanceSupplies(-amount);
+	}
+
+	void DevSetWarLevel(int level)
+	{
+		Rpc(RpcAsk_DevSetWarLevel, level);
+	}
+
+	[RplRpc(RplChannel.Reliable, RplRcver.Server)]
+	protected void RpcAsk_DevSetWarLevel(int level)
+	{
+		OVT_OccupyingFactionManager of = OVT_Global.GetOccupyingFaction();
+		of.DevSetWarState(level, of.GetAggression(), of.GetHR());
+	}
+
+	void DevSetAggression(float value)
+	{
+		Rpc(RpcAsk_DevSetAggression, value);
+	}
+
+	[RplRpc(RplChannel.Reliable, RplRcver.Server)]
+	protected void RpcAsk_DevSetAggression(float value)
+	{
+		OVT_OccupyingFactionManager of = OVT_Global.GetOccupyingFaction();
+		of.DevSetWarState(of.GetWarLevel(), value, of.GetHR());
+	}
+
+	void DevAddEnemyHR(int amount)
+	{
+		Rpc(RpcAsk_DevAddEnemyHR, amount);
+	}
+
+	[RplRpc(RplChannel.Reliable, RplRcver.Server)]
+	protected void RpcAsk_DevAddEnemyHR(int amount)
+	{
+		OVT_OccupyingFactionManager of = OVT_Global.GetOccupyingFaction();
+		int newHR = Math.Clamp(of.GetHR() + amount, 0, OVT_Global.GetDifficulty().hrMax);
+		of.DevSetWarState(of.GetWarLevel(), of.GetAggression(), newHR);
+	}
+
+	void DevSetTownSupport(vector pos, int supportPercent)
+	{
+		Rpc(RpcAsk_DevSetTownSupport, pos, supportPercent);
+	}
+
+	[RplRpc(RplChannel.Reliable, RplRcver.Server)]
+	protected void RpcAsk_DevSetTownSupport(vector pos, int supportPercent)
+	{
+		OVT_TownManagerComponent towns = OVT_Global.GetTowns();
+		OVT_TownData town = towns.GetNearestTown(pos);
+		if (!town) return;
+		int targetSupport = (supportPercent * town.population) / 100;
+		int delta = targetSupport - town.support;
+		towns.AddSupport(pos, delta);
+	}
+
+	void DevSetFactoryFaction(int factoryId, int faction)
+	{
+		Rpc(RpcAsk_DevSetFactoryFaction, factoryId, faction);
+	}
+
+	[RplRpc(RplChannel.Reliable, RplRcver.Server)]
+	protected void RpcAsk_DevSetFactoryFaction(int factoryId, int faction)
+	{
+		OVT_FactoryManagerComponent mgr = OVT_FactoryManagerComponent.GetInstance();
+		if (!mgr) return;
+		mgr.DevSetFactoryFaction(factoryId, faction);
+	}
+
+	void DevTeleport(int playerId, vector pos)
+	{
+		Rpc(RpcAsk_DevTeleport, playerId, pos);
+	}
+
+	[RplRpc(RplChannel.Reliable, RplRcver.Server)]
+	protected void RpcAsk_DevTeleport(int playerId, vector pos)
+	{
+		Print("[OVT DevTeleport] playerId=" + playerId + " pos=" + pos.ToString());
+		SCR_Global.TeleportPlayer(playerId, pos);
+	}
+
 	void SetCampPrivacy(OVT_CampData camp, bool isPrivate)
 	{
 		Rpc(RpcAsk_SetCampPrivacy, camp.location, isPrivate);

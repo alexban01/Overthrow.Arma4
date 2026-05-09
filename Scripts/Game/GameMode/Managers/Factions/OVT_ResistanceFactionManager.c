@@ -195,6 +195,14 @@ class OVT_ResistanceFactionManager: OVT_Component
 
 	int GetResistanceHR() { return m_iResistanceHR; }
 
+	void DevSetResistanceHR(int value)
+	{
+		m_iResistanceHR = Math.Clamp(value, 0, OVT_Global.GetDifficulty().resistanceHRMax);
+		Rpc(RpcDo_SetResistanceHR, m_iResistanceHR);
+		if (RplSession.Mode() != RplMode.Dedicated)
+			RpcDo_SetResistanceHR(m_iResistanceHR);
+	}
+
 	bool TakeResistanceHR(int amount)
 	{
 		if(m_iResistanceHR < amount) return false;

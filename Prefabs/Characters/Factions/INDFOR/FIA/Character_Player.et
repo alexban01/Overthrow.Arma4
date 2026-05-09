@@ -75,6 +75,13 @@ SCR_ChimeraCharacter : "{7A9EE19AB67B298B}Prefabs/Characters/Factions/INDFOR/FIA
      m_bHideHUDOnShow 1
      m_RowLayout "{6C2A4B3E7D5F8943}UI/Layouts/Menu/FactoryStatusMenu/FactoryStatusRow.layout"
     }
+    OVT_DevMenuContext "{DD000000000000B2}" {
+     m_Layout "{DD000000000000B3}UI/Layouts/Menu/DevMenu.layout"
+     m_sContextName "OverthrowBaseMenuContext"
+     m_sCloseAction "MenuBack"
+     m_bOpenActionCloses 0
+     m_bHideHUDOnShow 1
+    }
     OVT_BuildContext "{59C4C0E9D2BF409E}" {
      m_Layout "{871C07E88AE43089}UI/Layouts/Menu/BuildMenu.layout"
      m_sContextName "OverthrowBuildMenuContext"

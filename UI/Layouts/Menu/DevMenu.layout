@@ -1,0 +1,654 @@
+FrameWidgetClass "{DD00000000000001}" {
+ Name "rootFrame"
+ {
+  PanelWidgetClass "{DD00000000000002}" {
+   Name "DevPanel"
+   Slot FrameWidgetSlot "{DD00000000000003}" {
+    Anchor 0.5 0.5 0.5 0.5
+    PositionX 0
+    OffsetLeft 0
+    PositionY 0
+    OffsetTop 0
+    SizeX 1000
+    OffsetRight -1000
+    SizeY 900
+    OffsetBottom -900
+    Alignment 0.5 0.5
+   }
+   "Z Order" 100000
+   {
+    BlurWidgetClass "{DD00000000000004}" : "{352322057FD78AE1}UI/layouts/WidgetLibrary/BaseElements/WLib_Blur.layout" {
+     Name "BackgroundBlur"
+     Slot FrameWidgetSlot "{DD00000000000005}" {
+      Anchor 0 0 1 1
+      PositionX 0
+      OffsetLeft 0
+      PositionY 0
+      OffsetTop 0
+      SizeX 0
+      OffsetRight 0
+      SizeY 0
+      OffsetBottom 0
+     }
+     Color 0.1 0.1 0.1 1
+     Intensity 0.9
+    }
+    VerticalLayoutWidgetClass "{DD00000000000006}" {
+     Name "MainLayout"
+     Slot FrameWidgetSlot "{DD00000000000007}" {
+      Anchor 0 0 1 1
+      PositionX 0
+      OffsetLeft 10
+      PositionY 0
+      OffsetTop 10
+      SizeX 0
+      OffsetRight 10
+      SizeY 0
+      OffsetBottom 10
+     }
+     {
+      TextWidgetClass "{DD00000000000008}" {
+       Name "Title"
+       Slot LayoutSlot "{DD00000000000009}" {
+        Padding 0 0 0 8
+       }
+       Text "Developer Menu"
+       Color 1 0.6 0.1 1
+       "Font Size" 28
+      }
+      TextWidgetClass "{DD0000000000000A}" {
+       Name "StatusText"
+       Slot LayoutSlot "{DD0000000000000B}" {
+        Padding 4 0 4 8
+       }
+       Text "HR: 0 | Supplies: 0 | War Level: 1 | Aggression: 0 | Enemy HR: 1000"
+       Color 0.7 0.9 0.7 1
+       "Font Size" 13
+      }
+      ScrollLayoutWidgetClass "{DD0000000000000C}" {
+       Name "ContentScroll"
+       Slot LayoutSlot "{DD0000000000000D}" {
+        SizeMode Fill
+       }
+       {
+        VerticalLayoutWidgetClass "{DD0000000000000E}" {
+         Name "ContentContainer"
+         Slot OverlayWidgetSlot "{DD0000000000000F}" {
+          HorizontalAlign 3
+          VerticalAlign 0
+         }
+         {
+          TextWidgetClass "{DD00000000000010}" {
+           Name "ResourcesHeader"
+           Slot LayoutSlot "{DD00000000000011}" {
+            Padding 4 8 4 2
+           }
+           Text "-- RESOURCES --"
+           Color 0.6 0.6 0.6 1
+           "Font Size" 13
+          }
+          HorizontalLayoutWidgetClass "{DD00000000000012}" {
+           Name "HRRow"
+           Slot LayoutSlot "{DD00000000000013}" {
+            Padding 4 2 4 2
+           }
+           {
+            TextWidgetClass "{DD00000000000014}" {
+             Name "HRLabel"
+             Slot LayoutSlot "{DD00000000000015}" {
+              SizeMode Fill
+              VerticalAlign 1
+             }
+             Text "Resistance HR"
+             Color 0.85 0.85 0.85 1
+             "Font Size" 14
+            }
+            ButtonWidgetClass "{DD00000000000016}" : "{75C912A1C89BE6C2}UI/layouts/WidgetLibrary/Buttons/WLib_ButtonText.layout" {
+             Name "HRMinus500"
+             Slot LayoutSlot "{DD00000000000017}" {
+              Padding 2 2 2 2
+             }
+             components {
+              SCR_ButtonTextComponent "{DD00000000000018}" {
+               m_sText "-500"
+              }
+             }
+            }
+            ButtonWidgetClass "{DD00000000000019}" : "{75C912A1C89BE6C2}UI/layouts/WidgetLibrary/Buttons/WLib_ButtonText.layout" {
+             Name "HRMinus100"
+             Slot LayoutSlot "{DD0000000000001A}" {
+              Padding 2 2 2 2
+             }
+             components {
+              SCR_ButtonTextComponent "{DD0000000000001B}" {
+               m_sText "-100"
+              }
+             }
+            }
+            ButtonWidgetClass "{DD0000000000001C}" : "{75C912A1C89BE6C2}UI/layouts/WidgetLibrary/Buttons/WLib_ButtonText.layout" {
+             Name "HRPlus100"
+             Slot LayoutSlot "{DD0000000000001D}" {
+              Padding 2 2 2 2
+             }
+             components {
+              SCR_ButtonTextComponent "{DD0000000000001E}" {
+               m_sText "+100"
+              }
+             }
+            }
+            ButtonWidgetClass "{DD0000000000001F}" : "{75C912A1C89BE6C2}UI/layouts/WidgetLibrary/Buttons/WLib_ButtonText.layout" {
+             Name "HRPlus500"
+             Slot LayoutSlot "{DD00000000000020}" {
+              Padding 2 2 2 2
+             }
+             components {
+              SCR_ButtonTextComponent "{DD00000000000021}" {
+               m_sText "+500"
+              }
+             }
+            }
+           }
+          }
+          HorizontalLayoutWidgetClass "{DD00000000000022}" {
+           Name "SuppliesRow"
+           Slot LayoutSlot "{DD00000000000023}" {
+            Padding 4 2 4 2
+           }
+           {
+            TextWidgetClass "{DD00000000000024}" {
+             Name "SuppliesLabel"
+             Slot LayoutSlot "{DD00000000000025}" {
+              SizeMode Fill
+              VerticalAlign 1
+             }
+             Text "Resistance Supplies"
+             Color 0.85 0.85 0.85 1
+             "Font Size" 14
+            }
+            ButtonWidgetClass "{DD00000000000026}" : "{75C912A1C89BE6C2}UI/layouts/WidgetLibrary/Buttons/WLib_ButtonText.layout" {
+             Name "SupMinus1000"
+             Slot LayoutSlot "{DD00000000000027}" {
+              Padding 2 2 2 2
+             }
+             components {
+              SCR_ButtonTextComponent "{DD00000000000028}" {
+               m_sText "-1000"
+              }
+             }
+            }
+            ButtonWidgetClass "{DD00000000000029}" : "{75C912A1C89BE6C2}UI/layouts/WidgetLibrary/Buttons/WLib_ButtonText.layout" {
+             Name "SupMinus500"
+             Slot LayoutSlot "{DD0000000000002A}" {
+              Padding 2 2 2 2
+             }
+             components {
+              SCR_ButtonTextComponent "{DD0000000000002B}" {
+               m_sText "-500"
+              }
+             }
+            }
+            ButtonWidgetClass "{DD0000000000002C}" : "{75C912A1C89BE6C2}UI/layouts/WidgetLibrary/Buttons/WLib_ButtonText.layout" {
+             Name "SupPlus500"
+             Slot LayoutSlot "{DD0000000000002D}" {
+              Padding 2 2 2 2
+             }
+             components {
+              SCR_ButtonTextComponent "{DD0000000000002E}" {
+               m_sText "+500"
+              }
+             }
+            }
+            ButtonWidgetClass "{DD0000000000002F}" : "{75C912A1C89BE6C2}UI/layouts/WidgetLibrary/Buttons/WLib_ButtonText.layout" {
+             Name "SupPlus1000"
+             Slot LayoutSlot "{DD00000000000030}" {
+              Padding 2 2 2 2
+             }
+             components {
+              SCR_ButtonTextComponent "{DD00000000000031}" {
+               m_sText "+1000"
+              }
+             }
+            }
+           }
+          }
+          HorizontalLayoutWidgetClass "{DD00000000000032}" {
+           Name "CashRow"
+           Slot LayoutSlot "{DD00000000000033}" {
+            Padding 4 2 4 2
+           }
+           {
+            TextWidgetClass "{DD00000000000034}" {
+             Name "CashLabel"
+             Slot LayoutSlot "{DD00000000000035}" {
+              SizeMode Fill
+              VerticalAlign 1
+             }
+             Text "Player Cash"
+             Color 0.85 0.85 0.85 1
+             "Font Size" 14
+            }
+            ButtonWidgetClass "{DD00000000000036}" : "{75C912A1C89BE6C2}UI/layouts/WidgetLibrary/Buttons/WLib_ButtonText.layout" {
+             Name "CashMinus500"
+             Slot LayoutSlot "{DD00000000000037}" {
+              Padding 2 2 2 2
+             }
+             components {
+              SCR_ButtonTextComponent "{DD00000000000038}" {
+               m_sText "-500"
+              }
+             }
+            }
+            ButtonWidgetClass "{DD00000000000039}" : "{75C912A1C89BE6C2}UI/layouts/WidgetLibrary/Buttons/WLib_ButtonText.layout" {
+             Name "CashPlus500"
+             Slot LayoutSlot "{DD0000000000003A}" {
+              Padding 2 2 2 2
+             }
+             components {
+              SCR_ButtonTextComponent "{DD0000000000003B}" {
+               m_sText "+500"
+              }
+             }
+            }
+            ButtonWidgetClass "{DD0000000000003C}" : "{75C912A1C89BE6C2}UI/layouts/WidgetLibrary/Buttons/WLib_ButtonText.layout" {
+             Name "CashPlus5000"
+             Slot LayoutSlot "{DD0000000000003D}" {
+              Padding 2 2 2 2
+             }
+             components {
+              SCR_ButtonTextComponent "{DD0000000000003E}" {
+               m_sText "+5000"
+              }
+             }
+            }
+           }
+          }
+          TextWidgetClass "{DD0000000000003F}" {
+           Name "WarHeader"
+           Slot LayoutSlot "{DD00000000000040}" {
+            Padding 4 12 4 2
+           }
+           Text "-- WAR STATE --"
+           Color 0.6 0.6 0.6 1
+           "Font Size" 13
+          }
+          HorizontalLayoutWidgetClass "{DD00000000000041}" {
+           Name "WarLevelRow"
+           Slot LayoutSlot "{DD00000000000042}" {
+            Padding 4 2 4 2
+           }
+           {
+            TextWidgetClass "{DD00000000000043}" {
+             Name "WarLevelLabel"
+             Slot LayoutSlot "{DD00000000000044}" {
+              SizeMode Fill
+              VerticalAlign 1
+             }
+             Text "War Level"
+             Color 0.85 0.85 0.85 1
+             "Font Size" 14
+            }
+            ButtonWidgetClass "{DD00000000000045}" : "{75C912A1C89BE6C2}UI/layouts/WidgetLibrary/Buttons/WLib_ButtonText.layout" {
+             Name "WL1"
+             Slot LayoutSlot "{DD00000000000046}" {
+              Padding 2 2 2 2
+             }
+             components {
+              SCR_ButtonTextComponent "{DD00000000000047}" {
+               m_sText "1"
+              }
+             }
+            }
+            ButtonWidgetClass "{DD00000000000048}" : "{75C912A1C89BE6C2}UI/layouts/WidgetLibrary/Buttons/WLib_ButtonText.layout" {
+             Name "WL2"
+             Slot LayoutSlot "{DD00000000000049}" {
+              Padding 2 2 2 2
+             }
+             components {
+              SCR_ButtonTextComponent "{DD0000000000004A}" {
+               m_sText "2"
+              }
+             }
+            }
+            ButtonWidgetClass "{DD0000000000004B}" : "{75C912A1C89BE6C2}UI/layouts/WidgetLibrary/Buttons/WLib_ButtonText.layout" {
+             Name "WL3"
+             Slot LayoutSlot "{DD0000000000004C}" {
+              Padding 2 2 2 2
+             }
+             components {
+              SCR_ButtonTextComponent "{DD0000000000004D}" {
+               m_sText "3"
+              }
+             }
+            }
+            ButtonWidgetClass "{DD0000000000004E}" : "{75C912A1C89BE6C2}UI/layouts/WidgetLibrary/Buttons/WLib_ButtonText.layout" {
+             Name "WL4"
+             Slot LayoutSlot "{DD0000000000004F}" {
+              Padding 2 2 2 2
+             }
+             components {
+              SCR_ButtonTextComponent "{DD00000000000050}" {
+               m_sText "4"
+              }
+             }
+            }
+            ButtonWidgetClass "{DD00000000000051}" : "{75C912A1C89BE6C2}UI/layouts/WidgetLibrary/Buttons/WLib_ButtonText.layout" {
+             Name "WL5"
+             Slot LayoutSlot "{DD00000000000052}" {
+              Padding 2 2 2 2
+             }
+             components {
+              SCR_ButtonTextComponent "{DD00000000000053}" {
+               m_sText "5"
+              }
+             }
+            }
+           }
+          }
+          HorizontalLayoutWidgetClass "{DD00000000000054}" {
+           Name "AggressionRow"
+           Slot LayoutSlot "{DD00000000000055}" {
+            Padding 4 2 4 2
+           }
+           {
+            TextWidgetClass "{DD00000000000056}" {
+             Name "AggressionLabel"
+             Slot LayoutSlot "{DD00000000000057}" {
+              SizeMode Fill
+              VerticalAlign 1
+             }
+             Text "Aggression"
+             Color 0.85 0.85 0.85 1
+             "Font Size" 14
+            }
+            ButtonWidgetClass "{DD00000000000058}" : "{75C912A1C89BE6C2}UI/layouts/WidgetLibrary/Buttons/WLib_ButtonText.layout" {
+             Name "Agg0"
+             Slot LayoutSlot "{DD00000000000059}" {
+              Padding 2 2 2 2
+             }
+             components {
+              SCR_ButtonTextComponent "{DD0000000000005A}" {
+               m_sText "0%"
+              }
+             }
+            }
+            ButtonWidgetClass "{DD0000000000005B}" : "{75C912A1C89BE6C2}UI/layouts/WidgetLibrary/Buttons/WLib_ButtonText.layout" {
+             Name "Agg25"
+             Slot LayoutSlot "{DD0000000000005C}" {
+              Padding 2 2 2 2
+             }
+             components {
+              SCR_ButtonTextComponent "{DD0000000000005D}" {
+               m_sText "25%"
+              }
+             }
+            }
+            ButtonWidgetClass "{DD0000000000005E}" : "{75C912A1C89BE6C2}UI/layouts/WidgetLibrary/Buttons/WLib_ButtonText.layout" {
+             Name "Agg50"
+             Slot LayoutSlot "{DD0000000000005F}" {
+              Padding 2 2 2 2
+             }
+             components {
+              SCR_ButtonTextComponent "{DD00000000000060}" {
+               m_sText "50%"
+              }
+             }
+            }
+            ButtonWidgetClass "{DD00000000000061}" : "{75C912A1C89BE6C2}UI/layouts/WidgetLibrary/Buttons/WLib_ButtonText.layout" {
+             Name "Agg75"
+             Slot LayoutSlot "{DD00000000000062}" {
+              Padding 2 2 2 2
+             }
+             components {
+              SCR_ButtonTextComponent "{DD00000000000063}" {
+               m_sText "75%"
+              }
+             }
+            }
+            ButtonWidgetClass "{DD00000000000064}" : "{75C912A1C89BE6C2}UI/layouts/WidgetLibrary/Buttons/WLib_ButtonText.layout" {
+             Name "Agg100"
+             Slot LayoutSlot "{DD00000000000065}" {
+              Padding 2 2 2 2
+             }
+             components {
+              SCR_ButtonTextComponent "{DD00000000000066}" {
+               m_sText "100%"
+              }
+             }
+            }
+           }
+          }
+          HorizontalLayoutWidgetClass "{DD00000000000067}" {
+           Name "EnemyHRRow"
+           Slot LayoutSlot "{DD00000000000068}" {
+            Padding 4 2 4 2
+           }
+           {
+            TextWidgetClass "{DD00000000000069}" {
+             Name "EnemyHRLabel"
+             Slot LayoutSlot "{DD0000000000006A}" {
+              SizeMode Fill
+              VerticalAlign 1
+             }
+             Text "Enemy HR"
+             Color 0.85 0.85 0.85 1
+             "Font Size" 14
+            }
+            ButtonWidgetClass "{DD0000000000006B}" : "{75C912A1C89BE6C2}UI/layouts/WidgetLibrary/Buttons/WLib_ButtonText.layout" {
+             Name "EnemyHRZero"
+             Slot LayoutSlot "{DD0000000000006C}" {
+              Padding 2 2 2 2
+             }
+             components {
+              SCR_ButtonTextComponent "{DD0000000000006D}" {
+               m_sText "Zero"
+              }
+             }
+            }
+            ButtonWidgetClass "{DD0000000000006E}" : "{75C912A1C89BE6C2}UI/layouts/WidgetLibrary/Buttons/WLib_ButtonText.layout" {
+             Name "EnemyHRMinus100"
+             Slot LayoutSlot "{DD0000000000006F}" {
+              Padding 2 2 2 2
+             }
+             components {
+              SCR_ButtonTextComponent "{DD00000000000070}" {
+               m_sText "-100"
+              }
+             }
+            }
+            ButtonWidgetClass "{DD00000000000071}" : "{75C912A1C89BE6C2}UI/layouts/WidgetLibrary/Buttons/WLib_ButtonText.layout" {
+             Name "EnemyHRPlus100"
+             Slot LayoutSlot "{DD00000000000072}" {
+              Padding 2 2 2 2
+             }
+             components {
+              SCR_ButtonTextComponent "{DD00000000000073}" {
+               m_sText "+100"
+              }
+             }
+            }
+            ButtonWidgetClass "{DD00000000000074}" : "{75C912A1C89BE6C2}UI/layouts/WidgetLibrary/Buttons/WLib_ButtonText.layout" {
+             Name "EnemyHRFull"
+             Slot LayoutSlot "{DD00000000000075}" {
+              Padding 2 2 2 2
+             }
+             components {
+              SCR_ButtonTextComponent "{DD00000000000076}" {
+               m_sText "Full"
+              }
+             }
+            }
+           }
+          }
+          TextWidgetClass "{DD00000000000077}" {
+           Name "TownHeader"
+           Slot LayoutSlot "{DD00000000000078}" {
+            Padding 4 12 4 2
+           }
+           Text "-- TOWNS --"
+           Color 0.6 0.6 0.6 1
+           "Font Size" 13
+          }
+          ButtonWidgetClass "{DD00000000000079}" : "{C9DF0E6590F6C388}UI/layouts/WidgetLibrary/SpinBox/WLib_SpinBox.layout" {
+           Name "TownSpin"
+           Slot LayoutSlot "{DD0000000000007A}" {
+            HorizontalAlign 3
+            Padding 4 4 4 4
+           }
+           components {
+            SCR_SpinBoxComponent "{5472C6CBC0640458}" {
+             m_sLabel "Town"
+            }
+           }
+          }
+          HorizontalLayoutWidgetClass "{DD0000000000007C}" {
+           Name "TownActionsRow"
+           Slot LayoutSlot "{DD0000000000007D}" {
+            Padding 4 2 4 2
+           }
+           {
+            ButtonWidgetClass "{DD0000000000007E}" : "{75C912A1C89BE6C2}UI/layouts/WidgetLibrary/Buttons/WLib_ButtonText.layout" {
+             Name "TownTeleport"
+             Slot LayoutSlot "{DD0000000000007F}" {
+              Padding 2 2 2 2
+             }
+             components {
+              SCR_ButtonTextComponent "{DD00000000000080}" {
+               m_sText "Teleport"
+              }
+             }
+            }
+            ButtonWidgetClass "{DD00000000000081}" : "{75C912A1C89BE6C2}UI/layouts/WidgetLibrary/Buttons/WLib_ButtonText.layout" {
+             Name "TownSup0"
+             Slot LayoutSlot "{DD00000000000082}" {
+              Padding 2 2 2 2
+             }
+             components {
+              SCR_ButtonTextComponent "{DD00000000000083}" {
+               m_sText "0% Support"
+              }
+             }
+            }
+            ButtonWidgetClass "{DD00000000000084}" : "{75C912A1C89BE6C2}UI/layouts/WidgetLibrary/Buttons/WLib_ButtonText.layout" {
+             Name "TownSup50"
+             Slot LayoutSlot "{DD00000000000085}" {
+              Padding 2 2 2 2
+             }
+             components {
+              SCR_ButtonTextComponent "{DD00000000000086}" {
+               m_sText "50% Support"
+              }
+             }
+            }
+            ButtonWidgetClass "{DD00000000000087}" : "{75C912A1C89BE6C2}UI/layouts/WidgetLibrary/Buttons/WLib_ButtonText.layout" {
+             Name "TownSup100"
+             Slot LayoutSlot "{DD00000000000088}" {
+              Padding 2 2 2 2
+             }
+             components {
+              SCR_ButtonTextComponent "{DD00000000000089}" {
+               m_sText "100% Support"
+              }
+             }
+            }
+           }
+          }
+          TextWidgetClass "{DD0000000000008A}" {
+           Name "FactoryHeader"
+           Slot LayoutSlot "{DD0000000000008B}" {
+            Padding 4 12 4 2
+           }
+           Text "-- FACTORIES --"
+           Color 0.6 0.6 0.6 1
+           "Font Size" 13
+          }
+          ButtonWidgetClass "{DD0000000000008C}" : "{C9DF0E6590F6C388}UI/layouts/WidgetLibrary/SpinBox/WLib_SpinBox.layout" {
+           Name "FactorySpin"
+           Slot LayoutSlot "{DD0000000000008D}" {
+            HorizontalAlign 3
+            Padding 4 4 4 4
+           }
+           components {
+            SCR_SpinBoxComponent "{5472C6CBC0640458}" {
+             m_sLabel "Factory"
+            }
+           }
+          }
+          HorizontalLayoutWidgetClass "{DD0000000000008F}" {
+           Name "FactoryActionsRow"
+           Slot LayoutSlot "{DD00000000000090}" {
+            Padding 4 2 4 2
+           }
+           {
+            ButtonWidgetClass "{DD00000000000091}" : "{75C912A1C89BE6C2}UI/layouts/WidgetLibrary/Buttons/WLib_ButtonText.layout" {
+             Name "FactoryTeleport"
+             Slot LayoutSlot "{DD00000000000092}" {
+              Padding 2 2 2 2
+             }
+             components {
+              SCR_ButtonTextComponent "{DD00000000000093}" {
+               m_sText "Teleport"
+              }
+             }
+            }
+            ButtonWidgetClass "{DD00000000000094}" : "{75C912A1C89BE6C2}UI/layouts/WidgetLibrary/Buttons/WLib_ButtonText.layout" {
+             Name "FactorySetResistance"
+             Slot LayoutSlot "{DD00000000000095}" {
+              Padding 2 2 2 2
+             }
+             components {
+              SCR_ButtonTextComponent "{DD00000000000096}" {
+               m_sText "Set Resistance"
+              }
+             }
+            }
+            ButtonWidgetClass "{DD00000000000097}" : "{75C912A1C89BE6C2}UI/layouts/WidgetLibrary/Buttons/WLib_ButtonText.layout" {
+             Name "FactorySetEnemy"
+             Slot LayoutSlot "{DD00000000000098}" {
+              Padding 2 2 2 2
+             }
+             components {
+              SCR_ButtonTextComponent "{DD00000000000099}" {
+               m_sText "Set Enemy"
+              }
+             }
+            }
+           }
+          }
+         }
+        }
+       }
+      }
+      OverlayWidgetClass "{DD0000000000009A}" {
+       Name "Footer"
+       Slot LayoutSlot "{DD0000000000009B}" {
+       }
+       {
+        HorizontalLayoutWidgetClass "{DD0000000000009C}" {
+         Name "Buttons"
+         Slot OverlayWidgetSlot "{DD0000000000009D}" {
+          HorizontalAlign 3
+         }
+         {
+          ButtonWidgetClass "{DD0000000000009E}" : "{08CF3B69CB1ACBC4}UI/layouts/WidgetLibrary/Buttons/WLib_NavigationButton.layout" {
+           Name "CloseButton"
+           Slot LayoutSlot "{DD0000000000009F}" {
+           }
+           components {
+            SCR_InputButtonComponent "{DD000000000000A0}" {
+             Action "MenuBack"
+             ShowLabelInGamepad 1
+             ShowLabelInKeyboard 1
+             Text "Close"
+            }
+           }
+          }
+         }
+        }
+       }
+      }
+     }
+    }
+   }
+  }
+ }
+}

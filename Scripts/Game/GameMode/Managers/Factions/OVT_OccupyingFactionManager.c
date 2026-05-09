@@ -1328,6 +1328,21 @@ class OVT_OccupyingFactionManager: OVT_Component
 	float GetAggression() { return m_fAggression; }
 	int GetHR()           { return m_iHR; }
 
+	void DevSetWarState(int warLevel, float aggression, int hr)
+	{
+		m_iWarLevel = Math.Clamp(warLevel, 1, 5);
+		m_iWarPoints = 0;
+		m_fAggression = Math.Clamp(aggression, 0, 100);
+		m_iHR = Math.Max(0, hr);
+		Rpc(RpcDo_SetWarLevel, m_iWarLevel, m_iWarPoints);
+		Rpc(RpcDo_SetWarProgression, m_fAggression, m_iHR);
+		if (RplSession.Mode() != RplMode.Dedicated)
+		{
+			RpcDo_SetWarLevel(m_iWarLevel, m_iWarPoints);
+			RpcDo_SetWarProgression(m_fAggression, m_iHR);
+		}
+	}
+
 	//RPC Methods
 
 	override bool RplSave(ScriptBitWriter writer)

@@ -9,6 +9,9 @@ class OVT_DifficultySettings : ScriptAndConfig
 {	
 	[Attribute()]
 	string name;
+
+	[Attribute(defvalue: "0", desc: "Enable developer menu (single-player testing only)", category: "Developer")]
+	bool devMode;
 	
 	[Attribute()]
 	string description;

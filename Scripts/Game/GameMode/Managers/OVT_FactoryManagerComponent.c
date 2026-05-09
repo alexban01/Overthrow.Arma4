@@ -291,6 +291,13 @@ class OVT_FactoryManagerComponent : OVT_Component
 		Rpc(RpcDo_SetFactoryGarrisonCount, factory.id, factory.garrisonCount);
 	}
 
+	void DevSetFactoryFaction(int factoryId, int faction)
+	{
+		if (factoryId < 0 || factoryId >= m_aFactories.Count()) return;
+		m_aFactories[factoryId].faction = faction;
+		Rpc(RpcDo_SetFactoryFaction, factoryId, faction);
+	}
+
 	void RequestCaptureFactory(vector pos)
 	{
 		Rpc(RpcDo_RequestCaptureFactory, pos);
